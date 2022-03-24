@@ -5,6 +5,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
   justify-content: space-between;
+  padding: 20px 30px;
 }
 
 .App-logo {

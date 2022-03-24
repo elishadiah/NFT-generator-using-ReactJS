@@ -1,0 +1,58 @@
+.projectproperty {
+    width: 400px;
+}
+.property_container {
+    border: solid gray 1px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+}
+.property_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.property_item p {
+    width: 100%;
+    text-align: left;
+    margin: 10px 0px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.property_item input {
+    width: 360px;
+    height: 32px;
+    background:none;
+    padding: 0px 10px;
+    border: solid 1px gray;
+    border-radius: 5px;
+}
+.property_dimension {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.property_dimension input{
+    width: 42%;
+}
+.export_button {
+    width: 380px;
+    background: none;
+    border: solid gray 1px;
+    height: 32px;
+    margin-top: 15px;
+}
+.layer_container {
+    position: relative;
+}
+.setting_button {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    border: none;
+    width: 160px;
+    height: 28px;
+    font-weight: 800;
+    background: rgb(61, 61, 61);
+}

@@ -43,10 +43,11 @@ const priceData = [
   },
 ];
 export const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const generateCollection = (item) => {
     console.log("Generate Function: ", item);
+    setIsOpen(false);
   };
   return (
     <div className="sidebar">
