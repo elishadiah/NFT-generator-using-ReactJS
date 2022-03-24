@@ -2,11 +2,11 @@ import React from "react";
 import { LayerProperty } from "./LayerProperty";
 import { ProjectProperty } from "./ProjectProperty";
 
-export const PropertyManager = () => {
+export const PropertyManager = ({ setRarity }) => {
   return (
     <div>
       <ProjectProperty />
-      <LayerProperty />
+      <LayerProperty setRarity={setRarity} />
     </div>
   );
 };

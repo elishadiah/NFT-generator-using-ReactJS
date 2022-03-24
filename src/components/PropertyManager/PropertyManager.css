@@ -7,7 +7,7 @@
     padding: 10px;
     margin-top: 20px;
 }
-.property_item {
+.property_item {    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,6 +27,7 @@
     padding: 0px 10px;
     border: solid 1px gray;
     border-radius: 5px;
+    color: white;
 }
 .property_dimension {
     width: 100%;
@@ -35,6 +36,7 @@
 }
 .property_dimension input{
     width: 42%;
+    color: white;
 }
 .export_button {
     width: 380px;
@@ -55,4 +57,26 @@
     height: 28px;
     font-weight: 800;
     background: rgb(61, 61, 61);
+}
+.rarity_settings {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+}
+.rarity_modal {
+    width: 600px;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgb(22, 30, 77);
+}
+.range_area {
+    display: flex;
+}
+.range_area input{
+    width: 40px;
 }
