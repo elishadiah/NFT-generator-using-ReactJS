@@ -33,6 +33,9 @@
     margin: 5px;
     padding: 3px;
 }
+.selected_layer {
+    border-color: white;
+}
 
 /* New Layer */
 .new_layer {

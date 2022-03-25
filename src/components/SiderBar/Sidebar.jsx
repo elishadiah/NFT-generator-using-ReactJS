@@ -1,60 +1,35 @@
 import React, { useState } from "react";
+import { priceData } from "../../constant/priceData";
 import { Divider } from "./Divider";
 import { Layer } from "./Layer";
 import { NewLayer } from "./NewLayer";
 
-const initLayerData = [
-  {
-    title: "Background",
-    count: 2,
-    rarity: 30,
-  },
-  {
-    title: "Eye",
-    count: 1,
-    rarity: 40,
-  },
-  {
-    title: "Head",
-    count: 6,
-    rarity: 20,
-  },
-];
-const priceData = [
-  {
-    title: "100 Generative Art",
-    price: "0.00",
-    link: "100",
-  },
-  {
-    title: "1000 Generative Art",
-    price: "179.00",
-    link: "1000",
-  },
-  {
-    title: "5000 Generative Art",
-    price: "279.00",
-    link: "5000",
-  },
-  {
-    title: "10000 Generative Art",
-    price: "389.00",
-    link: "10000",
-  },
-];
-export const Sidebar = () => {
+export const Sidebar = ({
+  layerData,
+  setLayerData,
+  selectedLayer,
+  setSelectedLayer,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [layerData, setLayerData] = useState(initLayerData);
 
   const generateCollection = (item) => {
     console.log("Generate Function: ", item);
     setIsOpen(false);
   };
+  // const changeSelectedLayer = (e) => {
+  //   console.log("CangeSelectedLayer", e, selectedLayer);
+  //   setSelectedLayer(e);
+  // };
   return (
     <div className="sidebar">
       <div className="sidebar_title">Layers</div>
       {layerData.map((item) => (
-        <Layer data={item} />
+        <Layer
+          data={item}
+          selectedLayer={selectedLayer}
+          setSelectedLayer={setSelectedLayer}
+          // onClick={() => changeSelectedLayer(item.id)}
+        />
       ))}
       <NewLayer layerData={layerData} setLayerData={setLayerData} />
       <div className="buttons">

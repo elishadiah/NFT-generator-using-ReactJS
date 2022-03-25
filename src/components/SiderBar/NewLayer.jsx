@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./Sidebar.css";
 
 export const NewLayer = ({ layerData, setLayerData }) => {
-  // const [layerData, setLayerData] = props;
-  console.log("LayerData props: ", layerData);
   const [layerName, setLayerName] = useState("");
   const addLayer = () => {
     console.log("Add layer", layerName);
