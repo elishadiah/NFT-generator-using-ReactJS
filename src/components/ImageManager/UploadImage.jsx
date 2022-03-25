@@ -8,7 +8,7 @@ export const UploadImage = () => {
     //you can carry out any file validations here...
     setImageFiles(() => [...imageFiles, file]);
     setPreviewUrl(() => [...previewUrl, URL.createObjectURL(file)]);
-    console.log(URL.createObjectURL(file), previewUrl, imageFiles);
+    console.log("DragFiles", URL.createObjectURL(file), previewUrl, imageFiles);
   };
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -20,6 +20,27 @@ export const UploadImage = () => {
     //let's grab the image file
     let imageFile = event.dataTransfer.files[0];
     handleFile(imageFile);
+  };
+  const selectImage = (e) => {
+    console.log(
+      "SelectFiles",
+      //   URL.createObjectURL(e.target.files.filelist),
+      //   e.target.files.filelist,
+      previewUrl,
+      imageFiles
+    );
+    setImageFiles(() => [...imageFiles, e.target.files[0]]);
+    setPreviewUrl(() => [
+      ...previewUrl,
+      URL.createObjectURL(e.target.files[0]),
+    ]);
+    // console.log(
+    //   "SelectFiles",
+    //   URL.createObjectURL(e.target.files.filelist),
+    //   //   e.target.files.filelist,
+    //   previewUrl,
+    //   imageFiles
+    // );
   };
   return (
     <>
@@ -46,6 +67,7 @@ export const UploadImage = () => {
           type="file"
           multiple=""
           className="image_input"
+          onChange={(e) => selectImage(e)}
         />
       </div>
     </>
