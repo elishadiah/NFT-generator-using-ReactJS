@@ -14,10 +14,10 @@ export const LayerProperty = ({
           type="text"
           placeholder="Layer Name"
           value={
-            layerData.length > 3
+            layerData.length > 0
               ? layerData.filter((item) => item.id === selectedLayer).length > 0
                 ? layerData.filter((item) => item.id === selectedLayer)[0].title
-                : ""
+                : "sss"
               : ""
           }
           onChange={(e) => console.log("Chainged", e.target.value)}

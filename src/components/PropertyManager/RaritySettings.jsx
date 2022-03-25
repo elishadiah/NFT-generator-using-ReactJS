@@ -86,12 +86,11 @@ export const RaritySettings = ({
         <div className="child_range">
           <p>Assets - </p>
           {childRarityData.map((item) => (
-            <div className="range_area">
+            <div className="range_area" key={item.id}>
               <p>{item.title}</p>
               <div className="range_area_input">
                 <input
                   type="number"
-                  defaultValue={50}
                   value={item.value}
                   onChange={(e) => onChildRangeChanged(e.target.value, item.id)}
                 />
