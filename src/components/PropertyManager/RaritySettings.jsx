@@ -4,7 +4,7 @@ import "./PropertyManager.css";
 
 const DEFAULT_DATA = {
   title: "Background",
-  value: 25,
+  rarity: 25,
 };
 const CHILD_DATA = [
   {
@@ -27,18 +27,28 @@ const CHILD_DATA = [
   },
 ];
 
-export const RaritySettings = ({ setRarity }) => {
-  const [defaultData, setDefaultData] = useState(DEFAULT_DATA);
-  const [childData, setChildData] = useState(CHILD_DATA);
+export const RaritySettings = ({
+  setRarity,
+  selectedLayer,
+  setSelectedLayer,
+  layerData,
+  setLayerData,
+}) => {
+  const targetData = layerData.filter((item) => item.id === selectedLayer)[0];
+  console.log("Rarity props:>", targetData);
+  const [childRarityData, setChildRarityData] = useState(CHILD_DATA);
 
   const onMainRangeChanged = (value) => {
-    setDefaultData({ ...defaultData, value });
+    const newState = layerData.map((obj) =>
+      obj.id === selectedLayer ? { ...obj, rarity: value } : obj
+    );
+    setLayerData(newState);
   };
   const onChildRangeChanged = (value, id) => {
-    const newArray = childData.map((element) =>
+    const newArray = childRarityData.map((element) =>
       element.id === id ? { ...element, value } : element
     );
-    setChildData([...newArray]);
+    setChildRarityData([...newArray]);
   };
   return (
     <div className="rarity_settings">
@@ -47,13 +57,12 @@ export const RaritySettings = ({ setRarity }) => {
           &times;
         </button>
         <div className="parant_range">
-          <p>Rarity Settings - {defaultData.title}</p>
+          <p>Rarity Settings - {targetData.title}</p>
           <div className="range_area">
             <div className="range_area_input">
               <input
                 type="number"
-                defaultValue={50}
-                value={defaultData.value}
+                value={targetData.rarity}
                 onChange={(e) => onMainRangeChanged(e.target.value)}
               />
               <p>%</p>
@@ -61,7 +70,7 @@ export const RaritySettings = ({ setRarity }) => {
             <div className="range_area_picker">
               <p>1%</p>
               <Range
-                value={defaultData.value}
+                value={targetData.rarity}
                 fillColor={{ r: 20, g: 150, b: 100, a: 0.75 }}
                 tractColor={{ r: 10, g: 10, b: 0, a: 0.5 }}
                 height={14}
@@ -76,7 +85,7 @@ export const RaritySettings = ({ setRarity }) => {
         </div>
         <div className="child_range">
           <p>Assets - </p>
-          {childData.map((item) => (
+          {childRarityData.map((item) => (
             <div className="range_area">
               <p>{item.title}</p>
               <div className="range_area_input">

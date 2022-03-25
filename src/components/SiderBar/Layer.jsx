@@ -17,7 +17,7 @@ export const Layer = ({ data, selectedLayer, setSelectedLayer }) => {
     >
       <div className="layer_title">{data.title}</div>
       <div className="layer_values">
-        <p>{data.count}</p>
+        <p>{data.images.length}</p>
         <p>{data.rarity}%</p>
       </div>
     </div>

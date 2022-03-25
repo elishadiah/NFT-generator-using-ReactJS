@@ -9,7 +9,7 @@ export const NewLayer = ({ layerData, setLayerData }) => {
     const newObj = {
       id: new Date(dates).getTime(),
       title: layerName,
-      count: 0,
+      images: [],
       rarity: 0,
     };
     if (layerName) {

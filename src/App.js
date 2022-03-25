@@ -38,7 +38,15 @@ function App() {
         layerData={layerData.length > 0 ? layerData : []}
         selectedLayer={selectedLayer}
       />
-      {isRarity && <RaritySettings setRarity={setIsRarity} />}
+      {isRarity && (
+        <RaritySettings
+          setRarity={setIsRarity}
+          selectedLayer={selectedLayer}
+          setSelectedLayer={setSelectedLayer}
+          layerData={layerData.length > 0 ? layerData : []}
+          setLayerData={setLayerData}
+        />
+      )}
     </div>
   );
 }
