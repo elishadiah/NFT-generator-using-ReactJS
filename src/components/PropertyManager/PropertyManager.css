@@ -62,11 +62,13 @@
     position: absolute;
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.6);
 }
 .rarity_modal {
+    position: relative;
     width: 600px;
     height: fit-content;
     border-radius: 10px;
@@ -77,6 +79,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 20px 0px;
 }
 .range_area input{
     width: 40px;
@@ -97,12 +100,39 @@
 }
 .range_area_picker {
     display: flex;
-    width: 500px;
+    width: 80%;
+}
+.range_area_picker_child {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
 }
 .range_area_picker p {
-    margin-right: 10px;
+    margin: 0px 10px;
+}
+.child_comment {
+    display: flex;
+    justify-content: space-between;
 }
 .parant_range {
     border-bottom: solid 2px black;
-    padding: 20px 0px;
+    padding: 0px;
+}
+.close_modal {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 20px;
+    top: 20px;
+    border: none;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: rgb(15, 23, 65);
+    font-size: 24px;
+}
+.close_modal:hover {
+    cursor: pointer;
+    background-color: rgb(8, 12, 32);
 }

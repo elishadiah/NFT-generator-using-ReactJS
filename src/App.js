@@ -12,7 +12,7 @@ function App() {
       <Sidebar />
       <ImageManager />
       <PropertyManager setRarity={setIsRarity} />
-      {isRarity && <RaritySettings />}
+      {isRarity && <RaritySettings setRarity={setIsRarity} />}
     </div>
   );
 }
