@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { ImageManager } from "./components/ImageManager/ImageManager";
 import { PropertyManager } from "./components/PropertyManager/PropertyManager";
@@ -12,14 +12,17 @@ function App() {
   const [selectedLayer, setSelectedLayer] = useState(0);
 
   const deleteLayer = () => {
+    console.log("Deleting", selectedLayer, layerData);
     if (layerData.length > 0) {
       const newLayerData = layerData.filter(
         (item) => item.id !== selectedLayer
       );
-      setLayerData(newLayerData);
-      setSelectedLayer(layerData[0].id);
+      setSelectedLayer(newLayerData.length > 0 ? newLayerData[0].id : null);
+      setLayerData(newLayerData.length > 0 ? newLayerData : []);
     }
   };
+
+  useEffect(() => {}, [layerData, selectedLayer]);
   return (
     <div className="App">
       <Sidebar
@@ -29,7 +32,12 @@ function App() {
         setSelectedLayer={setSelectedLayer}
       />
       <ImageManager />
-      <PropertyManager setRarity={setIsRarity} deleteLayer={deleteLayer} />
+      <PropertyManager
+        setRarity={setIsRarity}
+        deleteLayer={deleteLayer}
+        layerData={layerData.length > 0 ? layerData : []}
+        selectedLayer={selectedLayer}
+      />
       {isRarity && <RaritySettings setRarity={setIsRarity} />}
     </div>
   );

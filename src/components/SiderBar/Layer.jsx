@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Sidebar.css";
 
 export const Layer = ({ data, selectedLayer, setSelectedLayer }) => {
   const changeSelectedLayer = (e) => {
-    console.log("CangeSelectedLayer", e, selectedLayer);
     setSelectedLayer(e);
   };
+  useEffect(() => {}, [selectedLayer]);
   return (
     <div
       className={

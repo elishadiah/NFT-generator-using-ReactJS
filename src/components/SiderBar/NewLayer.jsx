@@ -4,7 +4,6 @@ import "./Sidebar.css";
 export const NewLayer = ({ layerData, setLayerData }) => {
   const [layerName, setLayerName] = useState("");
   const addLayer = () => {
-    console.log("Add layer", layerName);
     var dates = new Date();
 
     const newObj = {
@@ -13,7 +12,13 @@ export const NewLayer = ({ layerData, setLayerData }) => {
       count: 0,
       rarity: 0,
     };
-    if (layerName) setLayerData(() => [...layerData, newObj]);
+    if (layerName) {
+      if (layerData.length > 0) {
+        setLayerData(() => [...layerData, newObj]);
+      } else {
+        setLayerData([newObj]);
+      }
+    }
     setLayerName("");
   };
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { priceData } from "../../constant/priceData";
 import { Divider } from "./Divider";
 import { Layer } from "./Layer";
@@ -16,19 +16,16 @@ export const Sidebar = ({
     console.log("Generate Function: ", item);
     setIsOpen(false);
   };
-  // const changeSelectedLayer = (e) => {
-  //   console.log("CangeSelectedLayer", e, selectedLayer);
-  //   setSelectedLayer(e);
-  // };
+  useEffect(() => {}, [layerData, selectedLayer]);
   return (
     <div className="sidebar">
       <div className="sidebar_title">Layers</div>
       {layerData.map((item) => (
         <Layer
           data={item}
+          key={item.id}
           selectedLayer={selectedLayer}
           setSelectedLayer={setSelectedLayer}
-          // onClick={() => changeSelectedLayer(item.id)}
         />
       ))}
       <NewLayer layerData={layerData} setLayerData={setLayerData} />
