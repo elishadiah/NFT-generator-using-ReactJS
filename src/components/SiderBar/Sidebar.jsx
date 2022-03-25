@@ -3,7 +3,7 @@ import { Divider } from "./Divider";
 import { Layer } from "./Layer";
 import { NewLayer } from "./NewLayer";
 
-const layerData = [
+const initLayerData = [
   {
     title: "Background",
     count: 2,
@@ -44,6 +44,7 @@ const priceData = [
 ];
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [layerData, setLayerData] = useState(initLayerData);
 
   const generateCollection = (item) => {
     console.log("Generate Function: ", item);
@@ -55,7 +56,7 @@ export const Sidebar = () => {
       {layerData.map((item) => (
         <Layer data={item} />
       ))}
-      <NewLayer />
+      <NewLayer layerData={layerData} setLayerData={setLayerData} />
       <div className="buttons">
         <button>Preview</button>
         <button onClick={() => setIsOpen(!isOpen)}>Pay & Generate Col.</button>
