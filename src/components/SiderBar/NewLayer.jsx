@@ -5,12 +5,15 @@ export const NewLayer = ({ layerData, setLayerData }) => {
   const [layerName, setLayerName] = useState("");
   const addLayer = () => {
     console.log("Add layer", layerName);
+    var dates = new Date();
+
     const newObj = {
+      id: new Date(dates).getTime(),
       title: layerName,
       count: 0,
       rarity: 0,
     };
-    setLayerData(() => [...layerData, newObj]);
+    if (layerName) setLayerData(() => [...layerData, newObj]);
     setLayerName("");
   };
   return (

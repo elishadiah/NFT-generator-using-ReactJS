@@ -1,6 +1,6 @@
 import React from "react";
 import "./PropertyManager.css";
-export const LayerProperty = ({ setRarity }) => {
+export const LayerProperty = ({ setRarity, deleteLayer }) => {
   return (
     <div className="property_container layer_container">
       <div className="property_item">
@@ -10,7 +10,9 @@ export const LayerProperty = ({ setRarity }) => {
       <button className="export_button" onClick={() => setRarity(true)}>
         Rarity Settings
       </button>
-      <button className="setting_button">Layer Settings&nbsp;&nbsp;x</button>
+      <button className="setting_button" onClick={() => deleteLayer()}>
+        Layer Settings&nbsp;&times;
+      </button>
     </div>
   );
 };

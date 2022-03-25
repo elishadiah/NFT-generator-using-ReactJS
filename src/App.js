@@ -10,6 +10,16 @@ function App() {
   const [isRarity, setIsRarity] = useState(false);
   const [layerData, setLayerData] = useState(initLayerData);
   const [selectedLayer, setSelectedLayer] = useState(0);
+
+  const deleteLayer = () => {
+    if (layerData.length > 0) {
+      const newLayerData = layerData.filter(
+        (item) => item.id !== selectedLayer
+      );
+      setLayerData(newLayerData);
+      setSelectedLayer(layerData[0].id);
+    }
+  };
   return (
     <div className="App">
       <Sidebar
@@ -19,7 +29,7 @@ function App() {
         setSelectedLayer={setSelectedLayer}
       />
       <ImageManager />
-      <PropertyManager setRarity={setIsRarity} />
+      <PropertyManager setRarity={setIsRarity} deleteLayer={deleteLayer} />
       {isRarity && <RaritySettings setRarity={setIsRarity} />}
     </div>
   );
