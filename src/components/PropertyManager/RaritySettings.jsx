@@ -6,7 +6,6 @@ const DEFAULT_DATA = {
   title: "Background",
   value: 25,
 };
-const DEFAULT_VALUE = 25;
 const CHILD_DATA = [
   {
     id: 0,

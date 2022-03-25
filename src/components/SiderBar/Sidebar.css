@@ -1,5 +1,6 @@
 .sidebar {
     width: 400px;
+    margin: 30px;
 }
 /* Single Layer */
 .layer_single {
@@ -91,8 +92,6 @@ button:hover {
 }
 .collection_size {
     font-weight: 800;
-}
-.generate_main {
 }
 .generate_item {
     display: flex;
