@@ -12,24 +12,35 @@ export const RaritySettings = ({ title, images }) => {
   return (
     <div className="rarity_settings">
       <div className="rarity_modal">
-        <div>
+        <div className="parant_range">
           <p>Rarity Settings - {title}</p>
           <div className="range_area">
-            <input
-              type="number"
-              defaultValue={50}
-              value={value}
-              onChange={(e) => onRangeChanged(e.target.value)}
-            />
-            <Range
-              value={value}
-              fillColor={{ r: 20, g: 150, b: 100, a: 0.75 }}
-              tractColor={{ r: 10, g: 10, b: 0, a: 0.5 }}
-              height={14}
-              width="100%"
-              onChange={(e) => onRangeChanged(e.target.value)}
-            />
+            <div className="range_area_input">
+              <input
+                type="number"
+                defaultValue={50}
+                value={value}
+                onChange={(e) => onRangeChanged(e.target.value)}
+              />
+              <p>%</p>
+            </div>
+            <div className="range_area_picker">
+              <p>{value}%</p>
+              <Range
+                value={value}
+                fillColor={{ r: 20, g: 150, b: 100, a: 0.75 }}
+                tractColor={{ r: 10, g: 10, b: 0, a: 0.5 }}
+                height={14}
+                min={1}
+                max={99}
+                width="100%"
+                onChange={(e) => onRangeChanged(e)}
+              />
+            </div>
           </div>
+        </div>
+        <div className="child_range">
+          <p>Assets - {title}</p>
         </div>
       </div>
     </div>

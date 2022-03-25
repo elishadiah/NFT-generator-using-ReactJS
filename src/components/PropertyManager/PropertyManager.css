@@ -61,7 +61,6 @@
 .rarity_settings {
     position: absolute;
     display: flex;
-    align-items: center;
     justify-content: center;
     width: 100vw;
     height: 100vh;
@@ -71,12 +70,39 @@
     width: 600px;
     height: fit-content;
     border-radius: 10px;
-    padding: 20px;
+    padding: 0px 20px;
     background-color: rgb(22, 30, 77);
 }
 .range_area {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .range_area input{
     width: 40px;
+    height: 16px;
+    background: none;
+    border: none;
+    color: white;
+}
+.range_area_input {
+    display: flex;
+    align-items: center;
+    background-color: rgb(4, 4, 41);
+    padding: 5px;
+}
+.range_area p{
+    font-size: 12px;
+    margin: 0px;
+}
+.range_area_picker {
+    display: flex;
+    width: 500px;
+}
+.range_area_picker p {
+    margin-right: 10px;
+}
+.parant_range {
+    border-bottom: solid 2px black;
+    padding: 20px 0px;
 }
