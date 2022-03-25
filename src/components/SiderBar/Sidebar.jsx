@@ -28,7 +28,11 @@ export const Sidebar = ({
           setSelectedLayer={setSelectedLayer}
         />
       ))}
-      <NewLayer layerData={layerData} setLayerData={setLayerData} />
+      <NewLayer
+        layerData={layerData}
+        setLayerData={setLayerData}
+        setSelectedLayer={setSelectedLayer}
+      />
       <div className="buttons">
         <button>Preview</button>
         <button onClick={() => setIsOpen(!isOpen)}>Pay & Generate Col.</button>

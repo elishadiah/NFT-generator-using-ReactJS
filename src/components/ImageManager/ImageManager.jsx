@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ImageManager.css";
 
-export const ImageManager = () => {
+export const ImageManager = ({ selectedLayer, layerData, setLayerData }) => {
   const [imageFiles, setImageFiles] = useState([]);
   const [previewUrl, setPreviewUrl] = useState([]);
   const handleFile = (file) => {

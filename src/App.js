@@ -31,7 +31,11 @@ function App() {
         selectedLayer={selectedLayer}
         setSelectedLayer={setSelectedLayer}
       />
-      <ImageManager />
+      <ImageManager
+        selectedLayer={selectedLayer}
+        layerData={layerData}
+        setLayerData={setLayerData}
+      />
       <PropertyManager
         setRarity={setIsRarity}
         deleteLayer={deleteLayer}

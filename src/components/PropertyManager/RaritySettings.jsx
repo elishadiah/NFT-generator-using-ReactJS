@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import Range from "react-range-progress";
 import "./PropertyManager.css";
 
-const DEFAULT_DATA = {
-  title: "Background",
-  rarity: 25,
-};
 const CHILD_DATA = [
   {
     id: 0,
@@ -35,7 +31,6 @@ export const RaritySettings = ({
   setLayerData,
 }) => {
   const targetData = layerData.filter((item) => item.id === selectedLayer)[0];
-  console.log("Rarity props:>", targetData);
   const [childRarityData, setChildRarityData] = useState(CHILD_DATA);
 
   const onMainRangeChanged = (value) => {
@@ -57,12 +52,17 @@ export const RaritySettings = ({
           &times;
         </button>
         <div className="parant_range">
-          <p>Rarity Settings - {targetData.title}</p>
+          <p>
+            Rarity Settings -{" "}
+            {layerData.length > 0
+              ? targetData.title
+              : "Please Create New Layer"}
+          </p>
           <div className="range_area">
             <div className="range_area_input">
               <input
                 type="number"
-                value={targetData.rarity}
+                value={layerData.length > 0 ? targetData.rarity : 20}
                 onChange={(e) => onMainRangeChanged(e.target.value)}
               />
               <p>%</p>
@@ -70,7 +70,7 @@ export const RaritySettings = ({
             <div className="range_area_picker">
               <p>1%</p>
               <Range
-                value={targetData.rarity}
+                value={layerData.length > 0 ? targetData.rarity : 20}
                 fillColor={{ r: 20, g: 150, b: 100, a: 0.75 }}
                 tractColor={{ r: 10, g: 10, b: 0, a: 0.5 }}
                 height={14}
