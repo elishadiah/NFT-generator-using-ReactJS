@@ -7,6 +7,7 @@ export const PropertyManager = ({
   deleteLayer,
   layerData,
   selectedLayer,
+  setLayerData,
 }) => {
   return (
     <div>
@@ -16,6 +17,7 @@ export const PropertyManager = ({
         deleteLayer={deleteLayer}
         layerData={layerData}
         selectedLayer={selectedLayer}
+        setLayerData={setLayerData}
       />
     </div>
   );

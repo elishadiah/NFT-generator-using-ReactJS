@@ -40,6 +40,7 @@ function App() {
         setRarity={setIsRarity}
         deleteLayer={deleteLayer}
         layerData={layerData.length > 0 ? layerData : []}
+        setLayerData={setLayerData}
         selectedLayer={selectedLayer}
       />
       {isRarity && (

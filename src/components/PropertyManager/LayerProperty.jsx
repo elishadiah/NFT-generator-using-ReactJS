@@ -5,7 +5,14 @@ export const LayerProperty = ({
   deleteLayer,
   layerData,
   selectedLayer,
+  setLayerData,
 }) => {
+  const changeLayerName = (e) => {
+    const newState = layerData.map((obj) =>
+      obj.id === selectedLayer ? { ...obj, title: e } : obj
+    );
+    setLayerData(newState);
+  };
   return (
     <div className="property_container layer_container">
       <div className="property_item">
@@ -20,7 +27,7 @@ export const LayerProperty = ({
                 : "sss"
               : ""
           }
-          onChange={(e) => console.log("Chainged", e.target.value)}
+          onChange={(e) => changeLayerName(e.target.value)}
         />
       </div>
       <button className="export_button" onClick={() => setRarity(true)}>
