@@ -9,16 +9,16 @@
     align-items: center;
     margin: 10px 0px;
     padding: 5px 10px;
-    background-color: rgb(64, 68, 67);
-    border: 1px solid rgb(64, 68, 67);
+    background-color: #32484D;
+    border: 1px solid #32484D;
     border-radius: 5px;
 }
 .layer_single:hover {
     cursor: pointer;
-    border: 1px solid blue;
+    border: 1px solid #04d9d9;
 }
 .layer_title {
-    color: wheat;
+    color: #fff;
     font-size: 18px;
     font-weight: 700;
 }
@@ -34,7 +34,7 @@
     padding: 3px;
 }
 .selected_layer {
-    border-color: white;
+    border-color: #0597F2;
 }
 
 /* New Layer */
@@ -44,8 +44,8 @@
     align-items: center;
     margin: 10px 0px;
     padding: 5px 10px;
-    background-color: rgb(64, 68, 67);
-    border: 1px solid rgb(64, 68, 67);
+    background-color: #32484D;
+    border: 1px solid #32484D;
     border-radius: 5px;
 }
 .new_layer_input {
@@ -76,7 +76,7 @@
     justify-content: space-between;
 }
 button {
-    background-color: rgb(138, 107, 113);
+    background-color: #0597F2;
     color: white;
     height: 32px;
     border-radius: 5px;
@@ -102,7 +102,7 @@ button:hover {
 }
 .generate_item:hover {
     cursor: pointer;
-    background-color: rgb(243, 236, 236);
+    background-color: #0597F233;
 }
 .generate_item p {
     margin: 5px;

@@ -57,7 +57,7 @@
     width: 160px;
     height: 28px;
     font-weight: 800;
-    background: rgb(61, 61, 61);
+    background: #0597f2;
 }
 .rarity_settings {
     position: absolute;
@@ -74,7 +74,7 @@
     height: fit-content;
     border-radius: 10px;
     padding: 0px 20px;
-    background-color: rgb(22, 30, 77);
+    background-color: #2947F2;
 }
 .range_area {
     display: flex;
@@ -92,7 +92,9 @@
 .range_area_input {
     display: flex;
     align-items: center;
-    background-color: rgb(4, 4, 41);
+    background-color: #1B014099;
+    border-radius: 5PX;
+    border: solid 1px #1B0140ff;
     padding: 5px;
 }
 .range_area p{
@@ -116,7 +118,7 @@
     justify-content: space-between;
 }
 .parant_range {
-    border-bottom: solid 2px black;
+    border-bottom: solid 2px #000000;
     padding: 0px;
 }
 .close_modal {
@@ -130,10 +132,10 @@
     border-radius: 50%;
     height: 30px;
     width: 30px;
-    background-color: rgb(15, 23, 65);
+    background-color: #1B014055;
     font-size: 24px;
 }
 .close_modal:hover {
     cursor: pointer;
-    background-color: rgb(8, 12, 32);
+    background-color: #1B0140cc;
 }

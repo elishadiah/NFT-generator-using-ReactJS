@@ -71,9 +71,9 @@ export const RaritySettings = ({
               <p>1%</p>
               <Range
                 value={layerData.length > 0 ? targetData.rarity : 20}
-                fillColor={{ r: 20, g: 150, b: 100, a: 0.75 }}
-                tractColor={{ r: 10, g: 10, b: 0, a: 0.5 }}
-                height={14}
+                fillColor={{ r: 4, g: 217, b: 217, a: 1 }}
+                tractColor={{ r: 255, g: 0, b: 0, a: 0.5 }}
+                height={18}
                 min={1}
                 max={99}
                 width="100%"
@@ -99,8 +99,8 @@ export const RaritySettings = ({
               <div className="range_area_picker_child">
                 <Range
                   value={item.value}
-                  fillColor={{ r: 20, g: 150, b: 100, a: 0.75 }}
-                  tractColor={{ r: 10, g: 10, b: 0, a: 0.5 }}
+                  fillColor={{ r: 4, g: 217, b: 217, a: 1 }}
+                  tractColor={{ r: 255, g: 0, b: 0, a: 0.5 }}
                   height={14}
                   min={1}
                   max={99}
