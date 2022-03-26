@@ -12,7 +12,6 @@ function App() {
   const [selectedLayer, setSelectedLayer] = useState(0);
 
   const deleteLayer = () => {
-    console.log("Deleting", selectedLayer, layerData);
     if (layerData.length > 0) {
       const newLayerData = layerData.filter(
         (item) => item.id !== selectedLayer
