@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { priceData } from "../../constant/priceData";
 import { Divider } from "./Divider";
 import { Layer } from "./Layer";
@@ -16,18 +17,56 @@ export const Sidebar = ({
     console.log("Generate Function: ", item);
     setIsOpen(false);
   };
+
+  const handleDrop = (droppedItem) => {
+    if (!droppedItem.destination) return;
+    var newState = [...layerData];
+    const [reorderedItem] = newState.splice(droppedItem.source.index, 1);
+    newState.splice(droppedItem.destination.index, 0, reorderedItem);
+    setLayerData(newState);
+  };
+
   useEffect(() => {}, [layerData, selectedLayer]);
   return (
     <div className="sidebar">
       <div className="sidebar_title">Layers</div>
-      {layerData.map((item) => (
-        <Layer
-          data={item}
-          key={item.id}
-          selectedLayer={selectedLayer}
-          setSelectedLayer={setSelectedLayer}
-        />
-      ))}
+      <DragDropContext onDragEnd={handleDrop}>
+        <Droppable droppableId="list-container">
+          {(provided) => (
+            <div
+              className="list-container"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {layerData.map((item, index) => (
+                <Draggable
+                  key={item.id}
+                  draggableId={item.id.toString()}
+                  index={index}
+                >
+                  {(provided) => (
+                    <div
+                      className="item-container"
+                      ref={provided.innerRef}
+                      {...provided.dragHandleProps}
+                      {...provided.draggableProps}
+                    >
+                      <div>
+                        <Layer
+                          data={item}
+                          selectedLayer={selectedLayer}
+                          setSelectedLayer={setSelectedLayer}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
       <NewLayer
         layerData={layerData}
         setLayerData={setLayerData}

@@ -3,26 +3,7 @@ export const initLayerData = [
     id: 0,
     title: "Background",
     count: 2,
-    images: [
-      //   {
-      //     id: 0,
-      //     url: "https://",
-      //     title: "",
-      //     rarity: 20,
-      //   },
-      //   {
-      //     id: 1,
-      //     url: "https://",
-      //     title: "",
-      //     rarity: 50,
-      //   },
-      //   {
-      //     id: 2,
-      //     url: "https://",
-      //     title: "",
-      //     rarity: 20,
-      //   },
-    ],
+    images: [],
     rarity: 30,
   },
   {
