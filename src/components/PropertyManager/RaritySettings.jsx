@@ -82,8 +82,10 @@ export const RaritySettings = ({
           <p>Assets - </p>
           {targetData.images.map((item) => (
             <div className="range_area" key={item.id}>
-              {/* <p>{item.title}</p> */}
-              <img src={item.url} alt="ttt" />
+              <div className="range_item_property">
+                <p className="range_item_name">{item.title}</p>
+                <img src={item.url} alt="ttt" />
+              </div>
               <div className="range_area_input">
                 <input
                   type="number"

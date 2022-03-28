@@ -33,9 +33,12 @@ export const LayerProperty = ({
       <button className="export_button" onClick={() => setRarity(true)}>
         Rarity Settings
       </button>
-      <button className="setting_button" onClick={() => deleteLayer()}>
-        Layer Settings&nbsp;&times;
-      </button>
+      <p className="setting_button">
+        Layer Settings&nbsp;&nbsp;&nbsp;
+        <span className="layer_property_close" onClick={() => deleteLayer()}>
+          &times;
+        </span>
+      </p>
     </div>
   );
 };

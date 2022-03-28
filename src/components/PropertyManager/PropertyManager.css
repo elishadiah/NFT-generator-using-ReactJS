@@ -51,13 +51,17 @@
 }
 .setting_button {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     right: 10px;
-    top: 20px;
-    border: none;
+    top: 0px;
     width: 160px;
     height: 28px;
-    font-weight: 800;
+    font-size: 16px;
+    font-weight: 700;
     background: #0597f2;
+    border-radius: 5px;
 }
 .rarity_settings {
     position: absolute;
@@ -83,7 +87,7 @@
     margin: 20px 0px;
 }
 .range_area input{
-    width: 40px;
+    width: 30px;
     height: 16px;
     background: none;
     border: none;
@@ -111,7 +115,7 @@
 }
 .range_area_picker_child {
     display: flex;
-    width: 70%;
+    width: 60%;
     flex-direction: column;
 }
 .range_area_picker p {
@@ -124,6 +128,23 @@
 .parant_range {
     border-bottom: solid 2px #000000;
     padding: 0px;
+}
+.range_item_name {
+    /* width: 50px; */
+}
+.layer_property_close {
+    padding: 0px 4px;
+}
+.layer_property_close:hover {
+    cursor: pointer;
+    background-color: #2947F2;
+    border-radius: 50%;
+}
+.range_item_property {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 120px;
 }
 .close_modal {
     position: absolute;
