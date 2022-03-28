@@ -42,3 +42,26 @@
     width: 120px;
     height: auto;
 }
+.selected_item {
+    position: relative;
+    border: solid 1px #04d9d9;
+}
+.remove_img {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background: #32484D;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+    font-size: 18px;
+}
+.remove_img:hover {
+    background: #0597F2;
+    cursor: pointer;
+}

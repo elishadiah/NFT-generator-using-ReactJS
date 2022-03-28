@@ -9,7 +9,8 @@ import { initLayerData } from "./constant/layerData";
 function App() {
   const [isRarity, setIsRarity] = useState(false);
   const [layerData, setLayerData] = useState(initLayerData);
-  const [selectedLayer, setSelectedLayer] = useState(0);
+  const [selectedLayer, setSelectedLayer] = useState(null);
+  const [selectedImg, setSelectedImg] = useState(null);
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -19,6 +20,22 @@ function App() {
       setSelectedLayer(newLayerData.length > 0 ? newLayerData[0].id : null);
       setLayerData(newLayerData.length > 0 ? newLayerData : []);
     }
+  };
+
+  const deleteImage = () => {
+    if (layerData.length > 0) {
+      const newImageData = layerData
+        .filter((item) => item.id === selectedLayer)[0]
+        .images.filter((option) => option.id !== selectedImg);
+      const newState = layerData.map((obj) =>
+        obj.id === selectedLayer ? { ...obj, images: newImageData } : obj
+      );
+
+      console.log("once more--->", newState);
+      // setSelectedLayer(newLayerData.length > 0 ? newLayerData[0].id : null);
+      setLayerData(newState.length > 0 ? newState : []);
+    }
+    console.log("ggg", selectedImg, selectedLayer);
   };
 
   useEffect(() => {}, [layerData, selectedLayer]);
@@ -34,6 +51,9 @@ function App() {
         selectedLayer={selectedLayer}
         layerData={layerData}
         setLayerData={setLayerData}
+        selectedImg={selectedImg}
+        setSelectedImg={setSelectedImg}
+        deleteImage={deleteImage}
       />
       <PropertyManager
         setRarity={setIsRarity}
