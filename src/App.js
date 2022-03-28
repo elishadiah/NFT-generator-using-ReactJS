@@ -30,12 +30,8 @@ function App() {
       const newState = layerData.map((obj) =>
         obj.id === selectedLayer ? { ...obj, images: newImageData } : obj
       );
-
-      console.log("once more--->", newState);
-      // setSelectedLayer(newLayerData.length > 0 ? newLayerData[0].id : null);
       setLayerData(newState.length > 0 ? newState : []);
     }
-    console.log("ggg", selectedImg, selectedLayer);
   };
 
   useEffect(() => {}, [layerData, selectedLayer]);

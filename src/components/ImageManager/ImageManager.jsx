@@ -39,27 +39,21 @@ export const ImageManager = ({
         ? { ...obj, images: [...obj.images, newImageData] }
         : obj
     );
-    console.log("new state: ", newState);
     setLayerData(newState);
   };
   // Image select
   const handleClickImg = (item) => {
-    console.log("clicked image", item);
     setSelectedImg(item);
   };
   const removeImg = (item) => {
-    console.log("image item", item);
     deleteImage();
   };
   useEffect(() => {
-    console.log("Entered to useEffect");
     setCurrentLayerData(
       layerData.length > 0
         ? layerData.filter((obj) => obj.id === selectedLayer)[0]
         : []
     );
-    console.log("LayerData", layerData);
-    console.log("CurrentLayerData", currentLayerData);
   }, [selectedLayer, layerData]);
   return (
     <div className="image_manager">
@@ -68,7 +62,6 @@ export const ImageManager = ({
           <div className="image_view">
             {currentLayerData !== null ? (
               currentLayerData.images.map((item, key) => {
-                console.log("InnerValue", item);
                 return (
                   <div
                     className={

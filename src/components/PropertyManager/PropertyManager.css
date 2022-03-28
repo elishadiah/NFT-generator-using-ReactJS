@@ -101,6 +101,10 @@
     font-size: 12px;
     margin: 0px;
 }
+.range_area img {
+    width: 30px;
+    height: auto;
+}
 .range_area_picker {
     display: flex;
     width: 80%;

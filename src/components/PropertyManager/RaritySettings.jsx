@@ -1,27 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Range from "react-range-progress";
 import "./PropertyManager.css";
-
-const CHILD_DATA = [
-  {
-    id: 0,
-    title: "Img01",
-    url: "https://",
-    value: 30,
-  },
-  {
-    id: 1,
-    title: "Img02",
-    url: "https://",
-    value: 50,
-  },
-  {
-    id: 2,
-    title: "Img03",
-    url: "https://",
-    value: 20,
-  },
-];
 
 export const RaritySettings = ({
   setRarity,
@@ -30,20 +9,36 @@ export const RaritySettings = ({
   layerData,
   setLayerData,
 }) => {
-  const targetData = layerData.filter((item) => item.id === selectedLayer)[0];
-  const [childRarityData, setChildRarityData] = useState(CHILD_DATA);
+  const targetData = layerData.find((item) => item.id === selectedLayer);
 
+  console.log("Target data", targetData);
   const onMainRangeChanged = (value) => {
     const newState = layerData.map((obj) =>
       obj.id === selectedLayer ? { ...obj, rarity: value } : obj
     );
     setLayerData(newState);
   };
+
   const onChildRangeChanged = (value, id) => {
-    const newArray = childRarityData.map((element) =>
-      element.id === id ? { ...element, value } : element
-    );
-    setChildRarityData([...newArray]);
+    if (layerData.length > 0) {
+      const index = targetData.images.findIndex((option) => option.id === id);
+      const newImageData = targetData.images[index];
+      // console.log("New Image Data", newImageData, value);
+      const newImageState = { ...newImageData, rarity: value };
+      // const newImageState = {
+      //   ...newImageData,
+      //   0: { ...newImageData["0"], ratity: value },
+      // };
+      let newState = [...layerData];
+      newState[layerData.findIndex((item) => item.id === selectedLayer)].images[
+        index
+      ] = newImageState;
+
+      // const newState = layerData.map((obj) =>
+      //   obj.id === selectedLayer ? { ...obj, images: [...newImageData] } : obj
+      // );
+      setLayerData(newState);
+    }
   };
   return (
     <div className="rarity_settings">
@@ -85,20 +80,21 @@ export const RaritySettings = ({
         </div>
         <div className="child_range">
           <p>Assets - </p>
-          {childRarityData.map((item) => (
+          {targetData.images.map((item) => (
             <div className="range_area" key={item.id}>
-              <p>{item.title}</p>
+              {/* <p>{item.title}</p> */}
+              <img src={item.url} alt="ttt" />
               <div className="range_area_input">
                 <input
                   type="number"
-                  value={item.value}
+                  value={item.rarity}
                   onChange={(e) => onChildRangeChanged(e.target.value, item.id)}
                 />
                 <p>%</p>
               </div>
               <div className="range_area_picker_child">
                 <Range
-                  value={item.value}
+                  value={item.rarity}
                   fillColor={{ r: 4, g: 217, b: 217, a: 1 }}
                   tractColor={{ r: 255, g: 0, b: 0, a: 0.5 }}
                   height={14}
