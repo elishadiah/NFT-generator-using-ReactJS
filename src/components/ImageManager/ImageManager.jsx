@@ -46,7 +46,9 @@ export const ImageManager = ({ selectedLayer, layerData, setLayerData }) => {
     ]);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("Selected Layer", selectedLayer);
+  }, [selectedLayer]);
   return (
     <div className="image_manager">
       <div className="image_show">
@@ -60,23 +62,25 @@ export const ImageManager = ({ selectedLayer, layerData, setLayerData }) => {
           </div>
         )}
       </div>
-      <div
-        className="upload_image"
-        onDragOver={handleDragOver}
-        onDrop={handleOnDrop}
-      >
-        <p>Click or drop images here!</p>
-        <p style={{ fontSize: 16, fontStyle: "italic" }}>
-          (image/png, image/git, video/mp4, Max size: 10MB)
-        </p>
-        <input
-          id="hidden-input"
-          type="file"
-          multiple=""
-          className="image_input"
-          onChange={(e) => selectImage(e)}
-        />
-      </div>
+      {selectedLayer !== null && (
+        <div
+          className="upload_image"
+          onDragOver={handleDragOver}
+          onDrop={handleOnDrop}
+        >
+          <p>Click or drop images here!</p>
+          <p style={{ fontSize: 16, fontStyle: "italic" }}>
+            (image/png, image/git, video/mp4, Max size: 10MB)
+          </p>
+          <input
+            id="hidden-input"
+            type="file"
+            multiple=""
+            className="image_input"
+            onChange={(e) => selectImage(e)}
+          />
+        </div>
+      )}
     </div>
   );
 };
