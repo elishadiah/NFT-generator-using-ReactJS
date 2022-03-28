@@ -9,12 +9,23 @@ export const ImageManager = ({
   setSelectedImg,
   deleteImage,
 }) => {
-  // const [previewUrl, setPreviewUrl] = useState([]);
   const [currentLayerData, setCurrentLayerData] = useState(null);
 
   const handleFile = (file) => {
-    //you can carry out any file validations here...
-    // setPreviewUrl(() => [...previewUrl, URL.createObjectURL(file)]);
+    var dates = new Date();
+    const newImageData = {
+      id: new Date(dates).getTime(),
+      url: URL.createObjectURL(file),
+      title: file.name,
+      size: file.size,
+      rarity: 20,
+    };
+    const newState = layerData.map((obj) =>
+      obj.id === selectedLayer
+        ? { ...obj, images: [...obj.images, newImageData] }
+        : obj
+    );
+    setLayerData(newState);
   };
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -51,7 +62,7 @@ export const ImageManager = ({
   useEffect(() => {
     setCurrentLayerData(
       layerData.length > 0
-        ? layerData.filter((obj) => obj.id === selectedLayer)[0]
+        ? layerData.find((obj) => obj.id === selectedLayer)
         : []
     );
   }, [selectedLayer, layerData]);

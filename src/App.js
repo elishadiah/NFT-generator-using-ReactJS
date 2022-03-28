@@ -62,7 +62,6 @@ function App() {
         <RaritySettings
           setRarity={setIsRarity}
           selectedLayer={selectedLayer}
-          setSelectedLayer={setSelectedLayer}
           layerData={layerData.length > 0 ? layerData : []}
           setLayerData={setLayerData}
         />

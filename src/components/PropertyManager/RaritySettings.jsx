@@ -5,13 +5,10 @@ import "./PropertyManager.css";
 export const RaritySettings = ({
   setRarity,
   selectedLayer,
-  setSelectedLayer,
   layerData,
   setLayerData,
 }) => {
   const targetData = layerData.find((item) => item.id === selectedLayer);
-
-  console.log("Target data", targetData);
   const onMainRangeChanged = (value) => {
     const newState = layerData.map((obj) =>
       obj.id === selectedLayer ? { ...obj, rarity: value } : obj
@@ -23,20 +20,11 @@ export const RaritySettings = ({
     if (layerData.length > 0) {
       const index = targetData.images.findIndex((option) => option.id === id);
       const newImageData = targetData.images[index];
-      // console.log("New Image Data", newImageData, value);
       const newImageState = { ...newImageData, rarity: value };
-      // const newImageState = {
-      //   ...newImageData,
-      //   0: { ...newImageData["0"], ratity: value },
-      // };
       let newState = [...layerData];
       newState[layerData.findIndex((item) => item.id === selectedLayer)].images[
         index
       ] = newImageState;
-
-      // const newState = layerData.map((obj) =>
-      //   obj.id === selectedLayer ? { ...obj, images: [...newImageData] } : obj
-      // );
       setLayerData(newState);
     }
   };
@@ -83,7 +71,7 @@ export const RaritySettings = ({
           {targetData.images.map((item) => (
             <div className="range_area" key={item.id}>
               <div className="range_item_property">
-                <p className="range_item_name">{item.title}</p>
+                <p>{item.title}</p>
                 <img src={item.url} alt="ttt" />
               </div>
               <div className="range_area_input">
