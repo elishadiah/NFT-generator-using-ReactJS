@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Sidebar.css";
 
-export const Layer = (layerData) => {
+export const Layer = ({ data, selectedLayer, setSelectedLayer }) => {
+  const changeSelectedLayer = (e) => {
+    setSelectedLayer(e);
+  };
+  useEffect(() => {}, [selectedLayer]);
   return (
-    <div className="layer_single">
-      <div className="layer_title">{layerData.data.title}</div>
+    <div
+      className={
+        data.id === selectedLayer
+          ? "layer_single selected_layer"
+          : "layer_single"
+      }
+      onClick={() => changeSelectedLayer(data.id)}
+    >
+      <div className="layer_title">= &nbsp;{data.title}</div>
       <div className="layer_values">
-        <p>{layerData.data.count}</p>
-        <p>{layerData.data.rarity}%</p>
+        <p>{data.images.length}</p>
+        <p>{data.rarity}%</p>
       </div>
     </div>
   );

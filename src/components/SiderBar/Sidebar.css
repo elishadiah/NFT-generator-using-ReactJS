@@ -1,20 +1,24 @@
+.sidebar {
+    width: 400px;
+    margin: 30px;
+}
 /* Single Layer */
 .layer_single {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    margin: 10px 0px;
     padding: 5px 10px;
-    background-color: rgb(64, 68, 67);
-    border: 1px solid rgb(64, 68, 67);
+    background-color: #32484D;
+    border: 1px solid #32484D;
     border-radius: 5px;
 }
 .layer_single:hover {
     cursor: pointer;
-    border: 1px solid blue;
+    border: 1px solid #04d9d9;
 }
 .layer_title {
-    color: wheat;
+    color: #fff;
     font-size: 18px;
     font-weight: 700;
 }
@@ -29,16 +33,19 @@
     margin: 5px;
     padding: 3px;
 }
+.selected_layer {
+    border-color: #0597F2;
+}
 
 /* New Layer */
 .new_layer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    margin: 10px 0px;
     padding: 5px 10px;
-    background-color: rgb(64, 68, 67);
-    border: 1px solid rgb(64, 68, 67);
+    background-color: #32484D;
+    border: 1px solid #32484D;
     border-radius: 5px;
 }
 .new_layer_input {
@@ -69,6 +76,41 @@
     justify-content: space-between;
 }
 button {
-    background-color: pink;
-    color: gray;
+    background-color: #0597F2;
+    color: white;
+    height: 32px;
+    border-radius: 5px;
+}
+button:hover {
+    cursor: pointer;
+}
+/* Generate */
+.generate_collection {
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.collection_size {
+    font-weight: 800;
+}
+.generate_item {
+    display: flex;
+    justify-content: space-between;
+}
+.generate_item:hover {
+    cursor: pointer;
+    background-color: #0597F233;
+}
+.generate_item p {
+    margin: 5px;
+}
+/* Divider */
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: gray;
+    margin: 10px 0px;
 }
