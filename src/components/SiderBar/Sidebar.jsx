@@ -101,10 +101,10 @@ export const Sidebar = ({
               </div>
             ))}
           </div>
-          <Divider />
+          {/* <Divider />
           <p className="generate_item">
             My Collection is smaller or equal to 100
-          </p>
+          </p> */}
           <Divider />
           <p>
             Want another size? <br /> Select a number up to 10,000 in the
