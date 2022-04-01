@@ -8,10 +8,15 @@ export const PropertyManager = ({
   layerData,
   selectedLayer,
   setLayerData,
+  collectionSize,
+  setCollectionSize,
 }) => {
   return (
     <div>
-      <ProjectProperty />
+      <ProjectProperty
+        collectionSize={collectionSize}
+        setCollectionSize={setCollectionSize}
+      />
       <LayerProperty
         setRarity={setRarity}
         deleteLayer={deleteLayer}

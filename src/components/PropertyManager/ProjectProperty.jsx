@@ -1,6 +1,6 @@
 import React from "react";
 import "./PropertyManager.css";
-export const ProjectProperty = () => {
+export const ProjectProperty = ({ collectionSize, setCollectionSize }) => {
   return (
     <div className="property_container">
       <div className="property_item">
@@ -13,7 +13,12 @@ export const ProjectProperty = () => {
       </div>
       <div className="property_item">
         <p>Collection Size</p>
-        <input type="text" placeholder="Collection Size" />
+        <input
+          type="number"
+          placeholder="Collection Size"
+          value={collectionSize}
+          onChange={(e) => setCollectionSize(e.target.value)}
+        />
       </div>
       <div className="property_item">
         <p>Dimesion</p>

@@ -11,6 +11,7 @@ function App() {
   const [layerData, setLayerData] = useState(initLayerData);
   const [selectedLayer, setSelectedLayer] = useState(null);
   const [selectedImg, setSelectedImg] = useState(null);
+  const [collectionSize, setCollectionSize] = useState(5);
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -57,6 +58,8 @@ function App() {
         layerData={layerData.length > 0 ? layerData : []}
         setLayerData={setLayerData}
         selectedLayer={selectedLayer}
+        collectionSize={collectionSize}
+        setCollectionSize={setCollectionSize}
       />
       {isRarity && (
         <RaritySettings
