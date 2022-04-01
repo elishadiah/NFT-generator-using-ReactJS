@@ -43,6 +43,8 @@ function App() {
         setLayerData={setLayerData}
         selectedLayer={selectedLayer}
         setSelectedLayer={setSelectedLayer}
+        collectionSize={collectionSize}
+        setCollectionSize={setCollectionSize}
       />
       <ImageManager
         selectedLayer={selectedLayer}

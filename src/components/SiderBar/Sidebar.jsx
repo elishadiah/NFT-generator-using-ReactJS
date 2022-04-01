@@ -10,11 +10,14 @@ export const Sidebar = ({
   setLayerData,
   selectedLayer,
   setSelectedLayer,
+  collectionSize,
+  setCollectionSize,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const generateCollection = (item) => {
+  const setCollectionNumber = (item) => {
     console.log("Generate Function: ", item);
+    setCollectionSize(item);
     setIsOpen(false);
   };
 
@@ -24,6 +27,10 @@ export const Sidebar = ({
     const [reorderedItem] = newState.splice(droppedItem.source.index, 1);
     newState.splice(droppedItem.destination.index, 0, reorderedItem);
     setLayerData(newState);
+  };
+
+  const generateCollection = () => {
+    console.log("This is Generate button");
   };
 
   useEffect(() => {}, [layerData, selectedLayer]);
@@ -74,7 +81,10 @@ export const Sidebar = ({
       />
       <div className="buttons">
         <button>Preview</button>
-        <button onClick={() => setIsOpen(!isOpen)}>Pay & Generate Col.</button>
+        <button onClick={() => generateCollection()}>
+          Generate Collection
+        </button>
+        <button onClick={() => setIsOpen(!isOpen)}>&#9660;</button>
       </div>
       {isOpen && (
         <div className="generate_collection">
@@ -84,7 +94,7 @@ export const Sidebar = ({
             {priceData.map((item) => (
               <div
                 className="generate_item"
-                onClick={() => generateCollection(item.link)}
+                onClick={() => setCollectionNumber(item.number)}
               >
                 <p>{item.title}</p>
                 <p>(${item.price})</p>
@@ -98,7 +108,7 @@ export const Sidebar = ({
           <Divider />
           <p>
             Want another size? <br /> Select a number up to 10,000 in the
-            right-hand column of your scren.
+            right-hand column of your screen.
           </p>
         </div>
       )}
