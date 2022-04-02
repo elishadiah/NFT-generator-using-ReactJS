@@ -10,13 +10,11 @@ export const Sidebar = ({
   setLayerData,
   selectedLayer,
   setSelectedLayer,
-  collectionSize,
   setCollectionSize,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const setCollectionNumber = (item) => {
-    console.log("Generate Function: ", item);
     setCollectionSize(item);
     setIsOpen(false);
   };
