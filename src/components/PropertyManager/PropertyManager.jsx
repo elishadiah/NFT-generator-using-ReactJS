@@ -1,5 +1,5 @@
 import React from "react";
-import { LayerProperty } from "./LayerProperty";
+// import { LayerProperty } from "./LayerProperty";
 import { ProjectProperty } from "./ProjectProperty";
 
 export const PropertyManager = ({
@@ -17,13 +17,13 @@ export const PropertyManager = ({
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
       />
-      <LayerProperty
+      {/* <LayerProperty
         setRarity={setRarity}
         deleteLayer={deleteLayer}
         layerData={layerData}
         selectedLayer={selectedLayer}
         setLayerData={setLayerData}
-      />
+      /> */}
     </div>
   );
 };

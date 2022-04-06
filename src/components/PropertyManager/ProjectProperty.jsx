@@ -3,7 +3,7 @@ import "./PropertyManager.css";
 export const ProjectProperty = ({ collectionSize, setCollectionSize }) => {
   return (
     <div className="property_container">
-      <div className="property_item">
+      <div className="property_item `">
         <p>Project Name</p>
         <input type="text" placeholder="Project Name" />
       </div>
@@ -17,6 +17,7 @@ export const ProjectProperty = ({ collectionSize, setCollectionSize }) => {
           type="number"
           placeholder="Collection Size"
           value={collectionSize}
+          className="collection_input"
           onChange={(e) => setCollectionSize(e.target.value)}
         />
       </div>
@@ -26,7 +27,14 @@ export const ProjectProperty = ({ collectionSize, setCollectionSize }) => {
           <input type="text" placeholder="" />
           <input type="text" placeholder="" />
         </div>
-        <button className="export_button">Export to: webp</button>
+      </div>
+      <div className="property_item `">
+        <p>Price (USD)</p>
+        <input type="number" className="collection_input" value={0} />
+      </div>
+      <div className="property_item">
+        <p>Export:</p>
+        <button className="export_button">webp</button>
       </div>
     </div>
   );

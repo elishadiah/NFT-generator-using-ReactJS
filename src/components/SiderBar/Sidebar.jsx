@@ -3,14 +3,19 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { priceData } from "../../constant/priceData";
 import { Divider } from "./Divider";
 import { Layer } from "./Layer";
+import { LayerProperty } from "./LayerProperty";
 import { NewLayer } from "./NewLayer";
 
 export const Sidebar = ({
+  setRarity,
+  deleteLayer,
   layerData,
   setLayerData,
   selectedLayer,
   setSelectedLayer,
   setCollectionSize,
+  isNewLayer,
+  setIsNewLayer,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -34,7 +39,23 @@ export const Sidebar = ({
   useEffect(() => {}, [layerData, selectedLayer]);
   return (
     <div className="sidebar">
-      <div className="sidebar_title">Layers</div>
+      {/* <div className="sidebar_title">Layers</div> */}
+      <LayerProperty
+        setRarity={setRarity}
+        deleteLayer={deleteLayer}
+        layerData={layerData}
+        selectedLayer={selectedLayer}
+        setLayerData={setLayerData}
+        setIsNewLayer={setIsNewLayer}
+      />
+      {isNewLayer && (
+        <NewLayer
+          layerData={layerData}
+          setLayerData={setLayerData}
+          setSelectedLayer={setSelectedLayer}
+          setIsNewLayer={setIsNewLayer}
+        />
+      )}
       <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="list-container">
           {(provided) => (
@@ -72,11 +93,7 @@ export const Sidebar = ({
           )}
         </Droppable>
       </DragDropContext>
-      <NewLayer
-        layerData={layerData}
-        setLayerData={setLayerData}
-        setSelectedLayer={setSelectedLayer}
-      />
+
       <div className="buttons">
         <button>Preview</button>
         <button onClick={() => generateCollection()}>
@@ -99,10 +116,6 @@ export const Sidebar = ({
               </div>
             ))}
           </div>
-          {/* <Divider />
-          <p className="generate_item">
-            My Collection is smaller or equal to 100
-          </p> */}
           <Divider />
           <p>
             Want another size? <br /> Select a number up to 10,000 in the

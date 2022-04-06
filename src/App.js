@@ -12,6 +12,7 @@ function App() {
   const [selectedLayer, setSelectedLayer] = useState(null);
   const [selectedImg, setSelectedImg] = useState(null);
   const [collectionSize, setCollectionSize] = useState(5);
+  const [isNewLayer, setIsNewLayer] = useState(false);
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -38,21 +39,6 @@ function App() {
   useEffect(() => {}, [layerData, selectedLayer]);
   return (
     <div className="App">
-      <Sidebar
-        layerData={layerData}
-        setLayerData={setLayerData}
-        selectedLayer={selectedLayer}
-        setSelectedLayer={setSelectedLayer}
-        setCollectionSize={setCollectionSize}
-      />
-      <ImageManager
-        selectedLayer={selectedLayer}
-        layerData={layerData}
-        setLayerData={setLayerData}
-        selectedImg={selectedImg}
-        setSelectedImg={setSelectedImg}
-        deleteImage={deleteImage}
-      />
       <PropertyManager
         setRarity={setIsRarity}
         deleteLayer={deleteLayer}
@@ -62,6 +48,28 @@ function App() {
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
       />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Sidebar
+          setRarity={setIsRarity}
+          deleteLayer={deleteLayer}
+          layerData={layerData}
+          setLayerData={setLayerData}
+          selectedLayer={selectedLayer}
+          setSelectedLayer={setSelectedLayer}
+          setCollectionSize={setCollectionSize}
+          isNewLayer={isNewLayer}
+          setIsNewLayer={setIsNewLayer}
+        />
+        <ImageManager
+          selectedLayer={selectedLayer}
+          layerData={layerData}
+          setLayerData={setLayerData}
+          selectedImg={selectedImg}
+          setSelectedImg={setSelectedImg}
+          deleteImage={deleteImage}
+        />
+      </div>
+
       {isRarity && (
         <RaritySettings
           setRarity={setIsRarity}

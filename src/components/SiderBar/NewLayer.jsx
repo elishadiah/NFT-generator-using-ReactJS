@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
 
-export const NewLayer = ({ layerData, setLayerData, setSelectedLayer }) => {
+export const NewLayer = ({
+  layerData,
+  setLayerData,
+  setSelectedLayer,
+  setIsNewLayer,
+}) => {
   const [layerName, setLayerName] = useState("");
   const addLayer = () => {
     var dates = new Date();
@@ -21,6 +26,7 @@ export const NewLayer = ({ layerData, setLayerData, setSelectedLayer }) => {
       }
     }
     setLayerName("");
+    setIsNewLayer(false);
   };
   return (
     <div className="new_layer">
