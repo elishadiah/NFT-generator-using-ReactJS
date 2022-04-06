@@ -46,11 +46,6 @@ function App() {
   return (
     <div className="App">
       <PropertyManager
-        setRarity={setIsRarity}
-        deleteLayer={deleteLayer}
-        layerData={layerData.length > 0 ? layerData : []}
-        setLayerData={setLayerData}
-        selectedLayer={selectedLayer}
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
         price={price}

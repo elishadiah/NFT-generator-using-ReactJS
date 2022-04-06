@@ -28,8 +28,8 @@ export const ProjectProperty = ({
       <div className="property_item">
         <p>Dimesion</p>
         <div className="property_dimension">
-          <input type="text" placeholder="" />
-          <input type="text" placeholder="" />
+          <input type="number" placeholder="" max={420} min={30} />
+          <input type="number" placeholder="" max={420} min={30} />
         </div>
       </div>
       <div className="property_item `">
