@@ -13,6 +13,7 @@ function App() {
   const [selectedImg, setSelectedImg] = useState(null);
   const [collectionSize, setCollectionSize] = useState(5);
   const [isNewLayer, setIsNewLayer] = useState(false);
+  const [price, setPrice] = useState(0);
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -36,7 +37,12 @@ function App() {
     }
   };
 
-  useEffect(() => {}, [layerData, selectedLayer]);
+  useEffect(() => {
+    setPrice(
+      215 * Math.floor(collectionSize / 5000) +
+        (4.99 * (collectionSize % 5000)) / 100
+    );
+  }, [layerData, selectedLayer, collectionSize]);
   return (
     <div className="App">
       <PropertyManager
@@ -47,6 +53,7 @@ function App() {
         selectedLayer={selectedLayer}
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
+        price={price}
       />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Sidebar

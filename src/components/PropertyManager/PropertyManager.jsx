@@ -10,12 +10,14 @@ export const PropertyManager = ({
   setLayerData,
   collectionSize,
   setCollectionSize,
+  price,
 }) => {
   return (
     <div>
       <ProjectProperty
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
+        price={price}
       />
       {/* <LayerProperty
         setRarity={setRarity}

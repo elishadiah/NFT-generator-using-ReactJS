@@ -1,6 +1,10 @@
 import React from "react";
 import "./PropertyManager.css";
-export const ProjectProperty = ({ collectionSize, setCollectionSize }) => {
+export const ProjectProperty = ({
+  collectionSize,
+  setCollectionSize,
+  price,
+}) => {
   return (
     <div className="property_container">
       <div className="property_item `">
@@ -30,7 +34,11 @@ export const ProjectProperty = ({ collectionSize, setCollectionSize }) => {
       </div>
       <div className="property_item `">
         <p>Price (USD)</p>
-        <input type="number" className="collection_input" value={0} />
+        <input
+          type="number"
+          className="collection_input"
+          value={Math.round(price * 100) / 100}
+        />
       </div>
       <div className="property_item">
         <p>Export:</p>
