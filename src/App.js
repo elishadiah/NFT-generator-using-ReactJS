@@ -1,3 +1,4 @@
+import mergeImages from "merge-images";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { ImageManager } from "./components/ImageManager/ImageManager";
@@ -5,7 +6,6 @@ import { PropertyManager } from "./components/PropertyManager/PropertyManager";
 import { RaritySettings } from "./components/PropertyManager/RaritySettings";
 import { Sidebar } from "./components/SiderBar/Sidebar";
 import { initLayerData } from "./constant/layerData";
-
 function App() {
   const [isRarity, setIsRarity] = useState(false);
   const [layerData, setLayerData] = useState(initLayerData);
@@ -14,6 +14,7 @@ function App() {
   const [collectionSize, setCollectionSize] = useState(5);
   const [isNewLayer, setIsNewLayer] = useState(false);
   const [price, setPrice] = useState(0);
+  const [previewImg, setPreviewImg] = useState("");
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -38,10 +39,16 @@ function App() {
   };
 
   useEffect(() => {
+    let imgArray = [];
+    layerData.map((item) => {
+      item.images.map((option) => imgArray.push({ src: option.url }));
+    });
     setPrice(
       215 * Math.floor(collectionSize / 5000) +
         (4.99 * (collectionSize % 5000)) / 100
     );
+    mergeImages(imgArray).then((b64) => setPreviewImg(b64));
+    console.log("LayerData : > ", layerData, imgArray);
   }, [layerData, selectedLayer, collectionSize]);
   return (
     <div className="App">
@@ -61,6 +68,7 @@ function App() {
           setCollectionSize={setCollectionSize}
           isNewLayer={isNewLayer}
           setIsNewLayer={setIsNewLayer}
+          previewImg={previewImg}
         />
         <ImageManager
           selectedLayer={selectedLayer}

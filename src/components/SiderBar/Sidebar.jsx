@@ -16,12 +16,14 @@ export const Sidebar = ({
   setCollectionSize,
   isNewLayer,
   setIsNewLayer,
+  previewImg,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOptiosOpen, setIsOptionsOpen] = useState(false);
+  const [isPreview, setIsPreview] = useState(false);
 
   const setCollectionNumber = (item) => {
     setCollectionSize(item);
-    setIsOpen(false);
+    setIsOptionsOpen(false);
   };
 
   const handleDrop = (droppedItem) => {
@@ -36,10 +38,16 @@ export const Sidebar = ({
     console.log("This is Generate button");
   };
 
+  const previewNFT = () => {
+    setIsPreview(!isPreview);
+    layerData
+      ? console.log("this is preview button")
+      : console.log("You should choose images to see your NFTs...");
+  };
+
   useEffect(() => {}, [layerData, selectedLayer]);
   return (
     <div className="sidebar">
-      {/* <div className="sidebar_title">Layers</div> */}
       <LayerProperty
         setRarity={setRarity}
         deleteLayer={deleteLayer}
@@ -95,13 +103,13 @@ export const Sidebar = ({
       </DragDropContext>
 
       <div className="buttons">
-        <button>Preview</button>
+        <button onClick={() => previewNFT()}>Preview</button>
         <button onClick={() => generateCollection()}>
           Generate Collection
         </button>
-        <button onClick={() => setIsOpen(!isOpen)}>&#9660;</button>
+        <button onClick={() => setIsOptionsOpen(!isOptiosOpen)}>&#9660;</button>
       </div>
-      {isOpen && (
+      {isOptiosOpen && (
         <div className="generate_collection">
           <p className="collection_size">Collection Size:</p>
           <Divider />
@@ -121,6 +129,21 @@ export const Sidebar = ({
             Want another size? <br /> Select a number up to 10,000 in the
             right-hand column of your screen.
           </p>
+        </div>
+      )}
+      {isPreview && (
+        <div>
+          <img
+            id="preview_id"
+            style={{
+              width: "98%",
+              border: "solid pink 2px",
+              marginTop: 20,
+              borderRadius: 20,
+            }}
+            src={previewImg}
+            alt="Preview Img"
+          />
         </div>
       )}
     </div>
