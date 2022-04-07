@@ -68,6 +68,25 @@ export const ImageManager = ({
   }, [selectedLayer, layerData]);
   return (
     <div className="image_manager">
+      {selectedLayer !== null && (
+        <div
+          className="upload_image"
+          onDragOver={handleDragOver}
+          onDrop={handleOnDrop}
+        >
+          <p>Click or drop images here!</p>
+          <p style={{ fontSize: 16, fontStyle: "italic" }}>
+            (image/png, image/git, video/mp4, Max size: 10MB)
+          </p>
+          <input
+            id="hidden-input"
+            type="file"
+            multiple=""
+            className="image_input"
+            onChange={(e) => selectImage(e)}
+          />
+        </div>
+      )}
       <div className="image_show">
         {currentLayerData && (
           <div className="image_view">
@@ -101,25 +120,6 @@ export const ImageManager = ({
           </div>
         )}
       </div>
-      {selectedLayer !== null && (
-        <div
-          className="upload_image"
-          onDragOver={handleDragOver}
-          onDrop={handleOnDrop}
-        >
-          <p>Click or drop images here!</p>
-          <p style={{ fontSize: 16, fontStyle: "italic" }}>
-            (image/png, image/git, video/mp4, Max size: 10MB)
-          </p>
-          <input
-            id="hidden-input"
-            type="file"
-            multiple=""
-            className="image_input"
-            onChange={(e) => selectImage(e)}
-          />
-        </div>
-      )}
     </div>
   );
 };
