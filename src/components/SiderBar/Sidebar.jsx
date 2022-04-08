@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { priceData } from "../../constant/priceData";
+import { bigPacks, priceData } from "../../constant/priceData";
 import { Divider } from "./Divider";
 import { Layer } from "./Layer";
 import { LayerProperty } from "./LayerProperty";
@@ -125,9 +125,38 @@ export const Sidebar = ({
             ))}
           </div>
           <Divider />
+          <div>
+            Save up by purchasing big packs
+            <div className="nft_packs">
+              {bigPacks.map((item) => (
+                <div className="card_pack">
+                  <p className="card_save">{item.save}</p>
+                  <p className="card_price">${item.price}</p>
+                  <p className="card_save">{item.nfts} NFTs</p>
+                  <button onClick={() => setCollectionNumber(item.value)}>
+                    Select
+                  </button>
+                </div>
+              ))}
+              {/* 
+              <div className="card_pack">
+                <p>Save 69$</p>
+                <p>$430</p>
+                <p>10000 NFT</p>
+                <button>Select</button>
+              </div>
+              <div className="card_pack">
+                <p>Save 104$</p>
+                <p>$645</p>
+                <p>15000 NFT</p>
+                <button>Select</button>
+              </div> */}
+            </div>
+          </div>
+          <Divider />
           <p>
-            Want another size? <br /> Select a number up to 10,000 in the
-            right-hand column of your screen.
+            Want another size? <br /> Select a number up to 15,000 in the top
+            row of your screen.
           </p>
         </div>
       )}

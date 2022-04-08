@@ -86,14 +86,15 @@ button:hover {
 }
 /* Generate */
 .generate_collection {
-    background-color: white;
+    background-color: #32484D;
     border-radius: 10px;
-    color: black;
+    color: white;
     padding: 10px;
     margin-top: 20px;
     font-size: 14px;
 }
 .collection_size {
+    font-size: 18px;
     font-weight: 800;
 }
 .generate_item {
@@ -106,6 +107,41 @@ button:hover {
 }
 .generate_item p {
     margin: 5px;
+}
+.nft_packs {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.card_pack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 3px #0597F2;
+}
+.card_pack p {
+    padding: 5px 0px;
+    margin: 0px;
+}
+.card_pack button {
+    border: solid 2px #1b0140;
+    color: white;
+    padding: 5px 10px;
+    font-weight: 600;
+    border-radius: 15px;
+}
+.card_save {
+    font-weight: 800;
+    color: #2947f2;
+}
+.card_price {
+    font-size: 26px;
+    font-weight: 800;
+    color: #059f72;
 }
 /* Divider */
 .divider {
