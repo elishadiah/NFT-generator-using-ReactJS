@@ -3,7 +3,7 @@ export const priceData = [
     title: "100 Generative Art with WaterMark",
     price: "0",
     link: "100",
-    number: 100,
+    number: 0,
   },
   {
     title: "100 Generative Art",
