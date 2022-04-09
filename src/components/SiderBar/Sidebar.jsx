@@ -50,10 +50,6 @@ export const Sidebar = ({
   };
 
   useEffect(() => {
-    console.log(
-      "PreviewImg",
-      previewImg.length < 1 ? "Empty" : typeof previewImg
-    );
     resultImages.length > 0 ? setIsPreview(true) : setIsPreview(false);
   }, [layerData, selectedLayer, previewImg, resultImages]);
   return (

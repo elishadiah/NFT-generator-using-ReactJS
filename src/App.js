@@ -106,7 +106,6 @@ function App() {
       }
       setResultImages(imageList);
       setResultMetadata(metadataList);
-      console.log("ResultImages : >", metadataList, imageList);
     } else {
       alert("You can't create so much NFTs with your assets! Add more assets.");
     }
@@ -121,7 +120,6 @@ function App() {
   const resultToZip = () => {
     const zip = new JSZip();
     let files = resultImages;
-    console.log("files::", files.length, resultMatadata);
     for (let file = 0; file < files.length; file++) {
       zip.folder("images").file(file + ".png", dataURLtoFile(files[file]), {
         base64: true,
@@ -145,7 +143,6 @@ function App() {
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }
-    console.log("Test", mime);
     return new File([u8arr], filename, { type: mime });
   };
 

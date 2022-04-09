@@ -14,20 +14,29 @@ export const ImageManager = ({
   const [currentLayerData, setCurrentLayerData] = useState(null);
 
   const handleFile = (file) => {
-    var dates = new Date();
-    const newImageData = {
-      id: new Date(dates).getTime(),
-      url: URL.createObjectURL(file),
-      title: file.name,
-      size: file.size,
-      rarity: 100,
-    };
-    const newState = layerData.map((obj) =>
-      obj.id === selectedLayer
-        ? { ...obj, images: [...obj.images, newImageData] }
-        : obj
-    );
-    setLayerData(newState);
+    let newImgArray = [];
+    let resultArray = [];
+    let cloneArray = [...layerData];
+    for (let i = 0; i < file.length; i++) {
+      var dates = new Date();
+      const newImageData = {
+        id: new Date(dates).getTime() + 1,
+        url: URL.createObjectURL(file[i]),
+        title: file[i].name,
+        size: file[i].size,
+        rarity: 100,
+      };
+      newImgArray.push(newImageData);
+    }
+    newImgArray.map((item) => {
+      resultArray = cloneArray.map((obj) =>
+        obj.id === selectedLayer
+          ? { ...obj, images: [...obj.images, item] }
+          : obj
+      );
+      cloneArray = resultArray;
+    });
+    setLayerData(resultArray);
   };
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -35,24 +44,33 @@ export const ImageManager = ({
   const handleOnDrop = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    let imageFile = event.dataTransfer.files[0];
+    let imageFile = event.dataTransfer.files;
     handleFile(imageFile);
   };
   const selectImage = (e) => {
-    var dates = new Date();
-    const newImageData = {
-      id: new Date(dates).getTime(),
-      url: URL.createObjectURL(e.target.files[0]),
-      title: e.target.files[0].name,
-      size: e.target.files[0].size,
-      rarity: 20,
-    };
-    const newState = layerData.map((obj) =>
-      obj.id === selectedLayer
-        ? { ...obj, images: [...obj.images, newImageData] }
-        : obj
-    );
-    setLayerData(newState);
+    let newImgArray = [];
+    let cloneArray = [...layerData];
+    let resultArray = [];
+    for (let i = 0; i < e.target.files.length; i++) {
+      var dates = new Date();
+      const newImageData = {
+        id: new Date(dates).getTime() + i,
+        url: URL.createObjectURL(e.target.files[i]),
+        title: e.target.files[i].name,
+        size: e.target.files[i].size,
+        rarity: 100,
+      };
+      newImgArray.push(newImageData);
+    }
+    newImgArray.map((item) => {
+      resultArray = cloneArray.map((obj) =>
+        obj.id === selectedLayer
+          ? { ...obj, images: [...obj.images, item] }
+          : obj
+      );
+      cloneArray = resultArray;
+    });
+    setLayerData(resultArray);
   };
   // Image select
   const handleClickImg = (item) => {
@@ -85,7 +103,7 @@ export const ImageManager = ({
           <input
             id="hidden-input"
             type="file"
-            multiple=""
+            multiple={true}
             className="image_input"
             onChange={(e) => selectImage(e)}
           />
@@ -115,6 +133,7 @@ export const ImageManager = ({
                         &times;
                       </p>
                     )}
+                    <p className="rarity_img">{item.rarity}%</p>
                   </div>
                 );
               })
