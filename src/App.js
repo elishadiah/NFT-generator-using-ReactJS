@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+import FileSaver from "file-saver";
+import JSZip from "jszip";
 import mergeImages from "merge-images";
 import React, { useEffect, useState } from "react";
 import "./App.css";
@@ -114,6 +116,39 @@ function App() {
     return Math.floor(Math.random() * 100);
   };
 
+  // zip files
+
+  const resultToZip = () => {
+    const zip = new JSZip();
+    let files = resultImages;
+    console.log("files::", files.length, resultMatadata);
+    for (let file = 0; file < files.length; file++) {
+      zip.folder("images").file(file + ".png", dataURLtoFile(files[file]), {
+        base64: true,
+      });
+    }
+    zip.file("metadata.json", JSON.stringify(resultMatadata), {
+      binary: false,
+    });
+    // zip.file("metadata.json", "resultMatadata");
+    zip.generateAsync({ type: "blob" }).then((content) => {
+      FileSaver.saveAs(content, `${projectName}`);
+    });
+  };
+
+  const dataURLtoFile = (dataurl, filename) => {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    console.log("Test", mime);
+    return new File([u8arr], filename, { type: mime });
+  };
+
   useEffect(() => {
     setPrice(
       215 * Math.floor(collectionSize / 5000) +
@@ -122,6 +157,7 @@ function App() {
   }, [collectionSize, projectName, projectDesc]);
   return (
     <div className="App">
+      {/* <button onClick={() => resultToZip()}>Download</button> */}
       <PropertyManager
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
@@ -130,6 +166,7 @@ function App() {
         setProjectName={setProjectName}
         projectDesc={projectDesc}
         setProjectDesc={setProjectDesc}
+        resultToZip={resultToZip}
       />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Sidebar

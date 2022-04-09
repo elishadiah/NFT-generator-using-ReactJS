@@ -21,7 +21,7 @@ export const Sidebar = ({
   resultImages,
 }) => {
   const [isOptiosOpen, setIsOptionsOpen] = useState(false);
-  const [isPreview, setIsPreview] = useState(true);
+  const [isPreview, setIsPreview] = useState(false);
   const [index, setIndex] = useState(0);
 
   const setCollectionNumber = (item) => {
@@ -54,7 +54,8 @@ export const Sidebar = ({
       "PreviewImg",
       previewImg.length < 1 ? "Empty" : typeof previewImg
     );
-  }, [layerData, selectedLayer, previewImg]);
+    resultImages.length > 0 ? setIsPreview(true) : setIsPreview(false);
+  }, [layerData, selectedLayer, previewImg, resultImages]);
   return (
     <div className="sidebar">
       <LayerProperty

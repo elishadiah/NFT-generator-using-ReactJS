@@ -8,6 +8,7 @@ export const ProjectProperty = ({
   projectDesc,
   setProjectName,
   setProjectDesc,
+  resultToZip,
 }) => {
   return (
     <div className="property_container">
@@ -39,20 +40,22 @@ export const ProjectProperty = ({
           onChange={(e) => setCollectionSize(e.target.value)}
         />
       </div>
-      <div className="property_item">
+      {/* <div className="property_item">
         <p>Dimesion</p>
         <div className="property_dimension">
           <input type="number" placeholder="" max={420} min={30} />
           <input type="number" placeholder="" max={420} min={30} />
         </div>
-      </div>
+      </div> */}
       <div className="property_item">
         <p>Price (USD)</p>
         <p className="collection_price">{Math.round(price * 100) / 100} $</p>
       </div>
       <div className="property_item">
         <p>Export:</p>
-        <button className="export_button">webp</button>
+        <button className="export_button" onClick={() => resultToZip()}>
+          Zip
+        </button>
       </div>
     </div>
   );

@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.9.1",
     "merge-images": "^2.0.0",
     "nft-art-generator": "^1.0.5",
     "react": "^17.0.2",

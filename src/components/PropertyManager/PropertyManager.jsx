@@ -9,6 +9,7 @@ export const PropertyManager = ({
   projectDesc,
   setProjectName,
   setProjectDesc,
+  resultToZip,
 }) => {
   return (
     <div>
@@ -20,6 +21,7 @@ export const PropertyManager = ({
         projectDesc={projectDesc}
         setProjectName={setProjectName}
         setProjectDesc={setProjectDesc}
+        resultToZip={resultToZip}
       />
     </div>
   );
