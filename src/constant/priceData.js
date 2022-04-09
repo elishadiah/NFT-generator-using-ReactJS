@@ -11,12 +11,6 @@ export const priceData = [
     link: "100",
     number: 100,
   },
-  // {
-  //   title: "200 Generative Art",
-  //   price: "9.98",
-  //   link: "200",
-  //   number: 200,
-  // },
   {
     title: "500 Generative Art",
     price: "24.95",
@@ -29,30 +23,6 @@ export const priceData = [
     link: "1000",
     number: 1000,
   },
-  // {
-  //   title: "2000 Generative Art",
-  //   price: "99.80",
-  //   link: "2000",
-  //   number: 2000,
-  // },
-  // {
-  //   title: "3000 Generative Art",
-  //   price: "149.70",
-  //   link: "3000",
-  //   number: 3000,
-  // },
-  // {
-  //   title: "4000 Generative Art",
-  //   price: "199.60",
-  //   link: "4000",
-  //   number: 4000,
-  // },
-  // {
-  //   title: "5000 Generative Art",
-  //   price: "215.00",
-  //   link: "5000",
-  //   number: 5000,
-  // },
 ];
 export const bigPacks = [
   {

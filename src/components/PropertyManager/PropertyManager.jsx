@@ -5,6 +5,10 @@ export const PropertyManager = ({
   collectionSize,
   setCollectionSize,
   price,
+  projectName,
+  projectDesc,
+  setProjectName,
+  setProjectDesc,
 }) => {
   return (
     <div>
@@ -12,6 +16,10 @@ export const PropertyManager = ({
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
         price={price}
+        projectName={projectName}
+        projectDesc={projectDesc}
+        setProjectName={setProjectName}
+        setProjectDesc={setProjectDesc}
       />
     </div>
   );

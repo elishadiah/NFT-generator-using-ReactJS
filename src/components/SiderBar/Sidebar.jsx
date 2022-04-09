@@ -17,9 +17,12 @@ export const Sidebar = ({
   isNewLayer,
   setIsNewLayer,
   previewImg,
+  generateImage,
+  resultImages,
 }) => {
   const [isOptiosOpen, setIsOptionsOpen] = useState(false);
-  const [isPreview, setIsPreview] = useState(false);
+  const [isPreview, setIsPreview] = useState(true);
+  const [index, setIndex] = useState(0);
 
   const setCollectionNumber = (item) => {
     setCollectionSize(item);
@@ -35,17 +38,23 @@ export const Sidebar = ({
   };
 
   const generateCollection = () => {
-    console.log("This is Generate button");
+    generateImage();
   };
 
   const previewNFT = () => {
-    setIsPreview(!isPreview);
+    // setIsPreview(!isPreview);
+    index === resultImages.length - 1 ? setIndex(0) : setIndex(index + 1);
     layerData
       ? console.log("this is preview button")
       : console.log("You should choose images to see your NFTs...");
   };
 
-  useEffect(() => {}, [layerData, selectedLayer]);
+  useEffect(() => {
+    console.log(
+      "PreviewImg",
+      previewImg.length < 1 ? "Empty" : typeof previewImg
+    );
+  }, [layerData, selectedLayer, previewImg]);
   return (
     <div className="sidebar">
       <LayerProperty
@@ -138,19 +147,6 @@ export const Sidebar = ({
                   </button>
                 </div>
               ))}
-              {/* 
-              <div className="card_pack">
-                <p>Save 69$</p>
-                <p>$430</p>
-                <p>10000 NFT</p>
-                <button>Select</button>
-              </div>
-              <div className="card_pack">
-                <p>Save 104$</p>
-                <p>$645</p>
-                <p>15000 NFT</p>
-                <button>Select</button>
-              </div> */}
             </div>
           </div>
           <Divider />
@@ -162,6 +158,7 @@ export const Sidebar = ({
       )}
       {isPreview && (
         <div>
+          {/* {previewImg != "" ? ( */}
           <img
             id="preview_id"
             style={{
@@ -170,9 +167,13 @@ export const Sidebar = ({
               marginTop: 20,
               borderRadius: 20,
             }}
-            src={previewImg}
-            alt="Preview Img"
+            // src={previewImg}
+            src={resultImages[index]}
+            alt="We can't generate any NFT now!"
           />
+          {/* ) : (
+            <div>We can't generate any NFT now!</div>
+          )} */}
         </div>
       )}
     </div>

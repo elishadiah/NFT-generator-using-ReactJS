@@ -4,16 +4,30 @@ export const ProjectProperty = ({
   collectionSize,
   setCollectionSize,
   price,
+  projectName,
+  projectDesc,
+  setProjectName,
+  setProjectDesc,
 }) => {
   return (
     <div className="property_container">
       <div className="property_item `">
         <p>Project Name</p>
-        <input type="text" placeholder="Project Name" />
+        <input
+          type="text"
+          placeholder="Project Name"
+          value={projectName}
+          onChange={(e) => setProjectName(e.target.value)}
+        />
       </div>
       <div className="property_item">
         <p>Project Description</p>
-        <input type="text" placeholder="Project Description" />
+        <input
+          type="text"
+          placeholder="Project Description"
+          value={projectDesc}
+          onChange={(e) => setProjectDesc(e.target.value)}
+        />
       </div>
       <div className="property_item">
         <p>Collection Size</p>
@@ -32,13 +46,9 @@ export const ProjectProperty = ({
           <input type="number" placeholder="" max={420} min={30} />
         </div>
       </div>
-      <div className="property_item `">
+      <div className="property_item">
         <p>Price (USD)</p>
-        <input
-          type="number"
-          className="collection_input"
-          value={Math.round(price * 100) / 100}
-        />
+        <p className="collection_price">{Math.round(price * 100) / 100} $</p>
       </div>
       <div className="property_item">
         <p>Export:</p>

@@ -66,6 +66,17 @@
 .collection_input {
     width: 100px !important;
 }
+.collection_price {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: 32px;
+    width: 75px !important;
+    padding: 0px 10px;
+    border: solid 1px gray;
+    border-radius: 5px;
+    margin: 0px!important;
+}
 .export_button {
     width: 100px;
     background: none;

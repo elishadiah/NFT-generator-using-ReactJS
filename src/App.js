@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import mergeImages from "merge-images";
 import React, { useEffect, useState } from "react";
 import "./App.css";
@@ -15,6 +16,11 @@ function App() {
   const [isNewLayer, setIsNewLayer] = useState(false);
   const [price, setPrice] = useState(0);
   const [previewImg, setPreviewImg] = useState("");
+  const [resultImg, setResultImg] = useState([]);
+  const [resultImages, setResultImages] = useState([]);
+  const [resultMatadata, setResultMetadata] = useState([]);
+  const [projectName, setProjectName] = useState("");
+  const [projectDesc, setProjectDesc] = useState("");
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -38,24 +44,92 @@ function App() {
     }
   };
 
+  const availableNFTs = () => {
+    let result = 1;
+    layerData.map((layer) => (result = result * (layer.images.length + 1)));
+    return result / 2;
+  };
+  const toString = (number) => {
+    if (number < 10) return String("0") + String(number);
+    else return String(number);
+  };
+
+  // Select image Array with Rarities
+  const generateImage = async () => {
+    const availableNumber = availableNFTs();
+    if (collectionSize < availableNumber) {
+      let dnaList = [];
+      let imageList = [];
+      let metadataList = [];
+      while (dnaList.length < collectionSize) {
+        const resImage = [];
+        let metadata = {
+          name: `${projectName}#` + String(dnaList.length + 1),
+          description: projectDesc,
+          external_url: "",
+          image: "/" + String(dnaList.length + 1),
+        };
+        const attributes = [];
+        let dna = "";
+        // eslint-disable-next-line array-callback-return
+        layerData.map((layer) => {
+          let layerRarity = generateRandom();
+          if (layerRarity < layer.rarity && layer.images.length > 0) {
+            let traitRarity = generateRandom();
+            const images = layer.images;
+            const imagesLen = images.length;
+            let i = 0;
+            while (i < imagesLen && traitRarity >= images[i].rarity) {
+              traitRarity -= images[i].rarity;
+              i = i + 1;
+            }
+            i = i === imagesLen ? generateRandom() % imagesLen : i;
+            resImage.push({ src: images[i].url });
+            attributes.push({
+              trait_type: layer.title,
+              value: images[i].title,
+            });
+            dna = dna + toString(i + 1);
+          } else {
+            dna = dna + toString(0);
+            attributes.push({ trait_type: layer.title, value: "NONE" });
+          }
+        });
+        if (resImage.length > 0 && !dnaList.includes(dna)) {
+          dnaList.push(dna);
+          const img = await mergeImages(resImage);
+          imageList.push(img);
+          metadataList.push({ ...metadata, attributes });
+        }
+      }
+      setResultImages(imageList);
+      setResultMetadata(metadataList);
+      console.log("ResultImages : >", metadataList, imageList);
+    } else {
+      alert("You can't create so much NFTs with your assets! Add more assets.");
+    }
+  };
+
+  const generateRandom = () => {
+    return Math.floor(Math.random() * 100);
+  };
+
   useEffect(() => {
-    let imgArray = [];
-    layerData.map((item) => {
-      item.images.map((option) => imgArray.push({ src: option.url }));
-    });
     setPrice(
       215 * Math.floor(collectionSize / 5000) +
         (4.99 * (collectionSize % 5000)) / 100
     );
-    mergeImages(imgArray).then((b64) => setPreviewImg(b64));
-    console.log("LayerData : > ", layerData, imgArray);
-  }, [layerData, selectedLayer, collectionSize]);
+  }, [collectionSize, projectName, projectDesc]);
   return (
     <div className="App">
       <PropertyManager
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
         price={price}
+        projectName={projectName}
+        setProjectName={setProjectName}
+        projectDesc={projectDesc}
+        setProjectDesc={setProjectDesc}
       />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Sidebar
@@ -69,6 +143,8 @@ function App() {
           isNewLayer={isNewLayer}
           setIsNewLayer={setIsNewLayer}
           previewImg={previewImg}
+          generateImage={generateImage}
+          resultImages={resultImages}
         />
         <ImageManager
           selectedLayer={selectedLayer}
@@ -77,6 +153,8 @@ function App() {
           selectedImg={selectedImg}
           setSelectedImg={setSelectedImg}
           deleteImage={deleteImage}
+          setResultImg={setResultImg}
+          setPreviewImg={setPreviewImg}
         />
       </div>
 
