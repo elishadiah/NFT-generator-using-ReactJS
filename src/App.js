@@ -48,8 +48,10 @@ function App() {
 
   const availableNFTs = () => {
     let result = 1;
-    layerData.map((layer) => (result = result * (layer.images.length + 1)));
-    return result / 2;
+    layerData.map(
+      (layer) => (result = result * layer.images.length * (layer.rarity / 100))
+    );
+    return result - 1;
   };
   const toString = (number) => {
     if (number < 10) return String("0") + String(number);
@@ -75,17 +77,21 @@ function App() {
         let dna = "";
         // eslint-disable-next-line array-callback-return
         layerData.map((layer) => {
-          let layerRarity = generateRandom();
+          let layerRarity = generateRandom(100);
           if (layerRarity < layer.rarity && layer.images.length > 0) {
-            let traitRarity = generateRandom();
             const images = layer.images;
             const imagesLen = images.length;
+            let randTotal = 0;
+            // eslint-disable-next-line array-callback-return
+            images.map((image) => {
+              randTotal = randTotal + image.rarity;
+            });
             let i = 0;
-            while (i < imagesLen && traitRarity >= images[i].rarity) {
+            let traitRarity = generateRandom(randTotal);
+            while (i < imagesLen && traitRarity > images[i].rarity) {
               traitRarity -= images[i].rarity;
               i = i + 1;
             }
-            i = i === imagesLen ? generateRandom() % imagesLen : i;
             resImage.push({ src: images[i].url });
             attributes.push({
               trait_type: layer.title,
@@ -106,13 +112,14 @@ function App() {
       }
       setResultImages(imageList);
       setResultMetadata(metadataList);
+      alert("Your NFTs has created successfully!");
     } else {
       alert("You can't create so much NFTs with your assets! Add more assets.");
     }
   };
 
-  const generateRandom = () => {
-    return Math.floor(Math.random() * 100);
+  const generateRandom = (num) => {
+    return Math.floor(Math.random() * num);
   };
 
   // zip files
