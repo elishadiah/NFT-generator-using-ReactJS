@@ -37,7 +37,15 @@ export const ProjectProperty = ({
           placeholder="Collection Size"
           value={collectionSize}
           className="collection_input"
-          onChange={(e) => setCollectionSize(e.target.value)}
+          onChange={(e) =>
+            setCollectionSize(
+              e.target.value > 15000
+                ? 15000
+                : e.target.value < 0
+                ? 0
+                : e.target.value
+            )
+          }
         />
       </div>
       {/* <div className="property_item">
