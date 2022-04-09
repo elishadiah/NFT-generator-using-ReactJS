@@ -10,17 +10,19 @@ export const RaritySettings = ({
 }) => {
   const targetData = layerData.find((item) => item.id === selectedLayer);
   const onMainRangeChanged = (value) => {
+    const realValue = value > 100 ? 100 : value < 0 ? 0 : value;
     const newState = layerData.map((obj) =>
-      obj.id === selectedLayer ? { ...obj, rarity: value } : obj
+      obj.id === selectedLayer ? { ...obj, rarity: realValue } : obj
     );
     setLayerData(newState);
   };
 
   const onChildRangeChanged = (value, id) => {
+    const realValue = value > 100 ? 100 : value < 0 ? 0 : value;
     if (layerData.length > 0) {
       const index = targetData.images.findIndex((option) => option.id === id);
       const newImageData = targetData.images[index];
-      const newImageState = { ...newImageData, rarity: value };
+      const newImageState = { ...newImageData, rarity: realValue };
       let newState = [...layerData];
       newState[layerData.findIndex((item) => item.id === selectedLayer)].images[
         index

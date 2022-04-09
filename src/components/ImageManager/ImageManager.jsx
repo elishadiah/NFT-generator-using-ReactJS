@@ -20,7 +20,7 @@ export const ImageManager = ({
       url: URL.createObjectURL(file),
       title: file.name,
       size: file.size,
-      rarity: 20,
+      rarity: 100,
     };
     const newState = layerData.map((obj) =>
       obj.id === selectedLayer

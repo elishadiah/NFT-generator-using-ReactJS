@@ -15,7 +15,7 @@ export const NewLayer = ({
       id: new Date(dates).getTime(),
       title: layerName,
       images: [],
-      rarity: 0,
+      rarity: 100,
     };
     if (layerName) {
       if (layerData.length > 0) {
