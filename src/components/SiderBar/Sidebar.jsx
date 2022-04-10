@@ -155,7 +155,6 @@ export const Sidebar = ({
       )}
       {isPreview && (
         <div>
-          {/* {previewImg != "" ? ( */}
           <img
             id="preview_id"
             style={{
@@ -164,13 +163,9 @@ export const Sidebar = ({
               marginTop: 20,
               borderRadius: 20,
             }}
-            // src={previewImg}
             src={resultImages[index]}
             alt="We can't generate any NFT now!"
           />
-          {/* ) : (
-            <div>We can't generate any NFT now!</div>
-          )} */}
         </div>
       )}
     </div>

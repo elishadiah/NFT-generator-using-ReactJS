@@ -9,6 +9,7 @@ import { PropertyManager } from "./components/PropertyManager/PropertyManager";
 import { RaritySettings } from "./components/PropertyManager/RaritySettings";
 import { Sidebar } from "./components/SiderBar/Sidebar";
 import { initLayerData } from "./constant/layerData";
+import { WatermarkImg } from "./constant/watermark";
 function App() {
   const [isRarity, setIsRarity] = useState(false);
   const [layerData, setLayerData] = useState(initLayerData);
@@ -23,6 +24,9 @@ function App() {
   const [resultMatadata, setResultMetadata] = useState([]);
   const [projectName, setProjectName] = useState("");
   const [projectDesc, setProjectDesc] = useState("");
+  const [isWaterMark, setIsWaterMark] = useState(
+    collectionSize < 100 ? true : false
+  );
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -104,10 +108,14 @@ function App() {
           }
         });
         if (resImage.length > 0 && !dnaList.includes(dna)) {
+          let tempRes = isWaterMark
+            ? [...resImage, { src: WatermarkImg }]
+            : [...resImage];
           dnaList.push(dna);
-          const img = await mergeImages(resImage);
+          const img = await mergeImages(tempRes);
           imageList.push(img);
           metadataList.push({ ...metadata, attributes });
+          console.log("ResImage", tempRes);
         }
       }
       setResultImages(imageList);
