@@ -71,7 +71,7 @@ function App() {
           name: `${projectName}#` + String(dnaList.length + 1),
           description: projectDesc,
           external_url: "",
-          image: "/" + String(dnaList.length + 1),
+          image: "/" + String(dnaList.length + 1) + ".png",
         };
         const attributes = [];
         let dna = "";
@@ -123,18 +123,29 @@ function App() {
   };
 
   // zip files
-
   const resultToZip = () => {
     const zip = new JSZip();
     let files = resultImages;
-    for (let file = 0; file < files.length; file++) {
-      zip.folder("images").file(file + ".png", dataURLtoFile(files[file]), {
+    const metadataTotal = {
+      name: projectName,
+      description: projectDesc,
+      collection: resultMatadata,
+    };
+    for (let file = 1; file <= files.length; file++) {
+      zip.folder("assets").file(file + ".png", dataURLtoFile(files[file - 1]), {
         base64: true,
       });
     }
-    zip.file("metadata.json", JSON.stringify(resultMatadata), {
-      binary: false,
-    });
+    zip
+      .folder("metadata")
+      .file("metadata.json", JSON.stringify(metadataTotal), {
+        binary: false,
+      });
+    for (let metadata = 1; metadata <= resultMatadata.length; metadata++) {
+      zip
+        .folder("metadata")
+        .file(metadata + ".json", JSON.stringify(resultMatadata[metadata - 1]));
+    }
     // zip.file("metadata.json", "resultMatadata");
     zip.generateAsync({ type: "blob" }).then((content) => {
       FileSaver.saveAs(content, `${projectName}`);
