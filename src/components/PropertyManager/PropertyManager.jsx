@@ -10,6 +10,7 @@ export const PropertyManager = ({
   setProjectName,
   setProjectDesc,
   resultToZip,
+  setIsZipping,
 }) => {
   return (
     <div>
@@ -22,6 +23,7 @@ export const PropertyManager = ({
         setProjectName={setProjectName}
         setProjectDesc={setProjectDesc}
         resultToZip={resultToZip}
+        setIsZipping={setIsZipping}
       />
     </div>
   );

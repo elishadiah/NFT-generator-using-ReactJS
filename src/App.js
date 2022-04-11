@@ -5,6 +5,7 @@ import mergeImages from "merge-images";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { ImageManager } from "./components/ImageManager/ImageManager";
+import { Loading } from "./components/Loading";
 import { PropertyManager } from "./components/PropertyManager/PropertyManager";
 import { RaritySettings } from "./components/PropertyManager/RaritySettings";
 import { Sidebar } from "./components/SiderBar/Sidebar";
@@ -24,9 +25,9 @@ function App() {
   const [resultMatadata, setResultMetadata] = useState([]);
   const [projectName, setProjectName] = useState("");
   const [projectDesc, setProjectDesc] = useState("");
-  const [isWaterMark, setIsWaterMark] = useState(
-    collectionSize < 100 ? true : false
-  );
+  const [isWaterMark, setIsWaterMark] = useState(true);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isZipping, setIsZipping] = useState(false);
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -66,6 +67,7 @@ function App() {
   const generateImage = async () => {
     const availableNumber = availableNFTs();
     if (collectionSize < availableNumber) {
+      setIsGenerating(true);
       let dnaList = [];
       let imageList = [];
       let metadataList = [];
@@ -120,7 +122,8 @@ function App() {
       }
       setResultImages(imageList);
       setResultMetadata(metadataList);
-      alert("Your NFTs has created successfully!");
+      setIsGenerating(false);
+      // alert("Your NFTs has created successfully!");
     } else {
       alert("You can't create so much NFTs with your assets! Add more assets.");
     }
@@ -132,6 +135,7 @@ function App() {
 
   // zip files
   const resultToZip = () => {
+    console.log("Clicked zip button", isZipping);
     const zip = new JSZip();
     let files = resultImages;
     const metadataTotal = {
@@ -157,6 +161,8 @@ function App() {
     // zip.file("metadata.json", "resultMatadata");
     zip.generateAsync({ type: "blob" }).then((content) => {
       FileSaver.saveAs(content, `${projectName}`);
+      setIsZipping(false);
+      console.log("finished zipping", isZipping);
     });
   };
 
@@ -177,10 +183,12 @@ function App() {
       215 * Math.floor(collectionSize / 5000) +
         (4.99 * (collectionSize % 5000)) / 100
     );
+    collectionSize < 100 ? setIsWaterMark(true) : setIsWaterMark(false);
   }, [collectionSize, projectName, projectDesc]);
   return (
     <div className="App">
-      {/* <button onClick={() => resultToZip()}>Download</button> */}
+      {isGenerating && <Loading val="generating" />}
+      {isZipping && <Loading val="zipping" />}
       <PropertyManager
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
@@ -190,6 +198,7 @@ function App() {
         projectDesc={projectDesc}
         setProjectDesc={setProjectDesc}
         resultToZip={resultToZip}
+        setIsZipping={setIsZipping}
       />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Sidebar

@@ -9,7 +9,12 @@ export const ProjectProperty = ({
   setProjectName,
   setProjectDesc,
   resultToZip,
+  setIsZipping,
 }) => {
+  const onClickZip = () => {
+    setIsZipping(true);
+    resultToZip();
+  };
   return (
     <div className="property_container">
       <div className="property_item `">
@@ -61,7 +66,7 @@ export const ProjectProperty = ({
       </div>
       <div className="property_item">
         <p>Export:</p>
-        <button className="export_button" onClick={() => resultToZip()}>
+        <button className="export_button" onClick={() => onClickZip()}>
           Zip
         </button>
       </div>
