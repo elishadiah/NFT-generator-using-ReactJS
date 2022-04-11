@@ -129,6 +129,66 @@ function App() {
     }
   };
 
+  const generatePrevImg = async () => {
+    const availableNumber = availableNFTs();
+    const tempColSize = availableNumber > 100 ? 50 : availableNumber / 2;
+    if (tempColSize < availableNumber) {
+      let dnaList = [];
+      let imageList = [];
+      let metadataList = [];
+      while (dnaList.length < tempColSize) {
+        const resImage = [];
+        let metadata = {
+          name: `${projectName}#` + String(dnaList.length + 1),
+          description: projectDesc,
+          external_url: "",
+          image: "/" + String(dnaList.length + 1) + ".png",
+        };
+        const attributes = [];
+        let dna = "";
+        // eslint-disable-next-line array-callback-return
+        layerData.map((layer) => {
+          let layerRarity = generateRandom(100);
+          if (layerRarity < layer.rarity && layer.images.length > 0) {
+            const images = layer.images;
+            const imagesLen = images.length;
+            let randTotal = 0;
+            // eslint-disable-next-line array-callback-return
+            images.map((image) => {
+              randTotal = randTotal + image.rarity;
+            });
+            let i = 0;
+            let traitRarity = generateRandom(randTotal);
+            while (i < imagesLen && traitRarity > images[i].rarity) {
+              traitRarity -= images[i].rarity;
+              i = i + 1;
+            }
+            resImage.push({ src: images[i].url });
+            attributes.push({
+              trait_type: layer.title,
+              value: images[i].title,
+            });
+            dna = dna + toString(i + 1);
+          } else {
+            dna = dna + toString(0);
+            attributes.push({ trait_type: layer.title, value: "NONE" });
+          }
+        });
+        if (resImage.length > 0 && !dnaList.includes(dna)) {
+          let tempRes = isWaterMark
+            ? [...resImage, { src: WatermarkImg }]
+            : [...resImage];
+          dnaList.push(dna);
+          const img = await mergeImages(tempRes);
+          imageList.push(img);
+          metadataList.push({ ...metadata, attributes });
+        }
+      }
+      setResultImages(imageList);
+    } else {
+      console.log("Not enough to create images");
+    }
+  };
   const generateRandom = (num) => {
     return Math.floor(Math.random() * num);
   };
@@ -183,12 +243,15 @@ function App() {
   };
 
   useEffect(() => {
+    generatePrevImg();
     setPrice(
-      215 * Math.floor(collectionSize / 5000) +
-        (4.99 * (collectionSize % 5000)) / 100
+      isWaterMark
+        ? 0
+        : 215 * Math.floor(collectionSize / 5000) +
+            (4.99 * (collectionSize % 5000)) / 100
     );
-    collectionSize < 100 ? setIsWaterMark(true) : setIsWaterMark(false);
-  }, [collectionSize, projectName, projectDesc]);
+    collectionSize <= 100 ? setIsWaterMark(true) : setIsWaterMark(false);
+  }, [collectionSize, projectName, projectDesc, isWaterMark, layerData]);
   return (
     <div className="App">
       {isGenerating && (
