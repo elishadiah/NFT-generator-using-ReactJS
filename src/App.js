@@ -20,7 +20,6 @@ function App() {
   const [isNewLayer, setIsNewLayer] = useState(false);
   const [price, setPrice] = useState(0);
   const [previewImg, setPreviewImg] = useState("");
-  const [resultImg, setResultImg] = useState([]);
   const [resultImages, setResultImages] = useState([]);
   const [resultMatadata, setResultMetadata] = useState([]);
   const [projectName, setProjectName] = useState("");
@@ -28,6 +27,7 @@ function App() {
   const [isWaterMark, setIsWaterMark] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isZipping, setIsZipping] = useState(false);
+  const [currentPercent, setCurrentPercent] = useState(0);
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -72,6 +72,8 @@ function App() {
       let imageList = [];
       let metadataList = [];
       while (dnaList.length < collectionSize) {
+        const percentage = Math.floor((100 * dnaList.length) / collectionSize);
+        setCurrentPercent(percentage);
         const resImage = [];
         let metadata = {
           name: `${projectName}#` + String(dnaList.length + 1),
@@ -117,13 +119,11 @@ function App() {
           const img = await mergeImages(tempRes);
           imageList.push(img);
           metadataList.push({ ...metadata, attributes });
-          console.log("ResImage", tempRes);
         }
       }
       setResultImages(imageList);
       setResultMetadata(metadataList);
       setIsGenerating(false);
-      // alert("Your NFTs has created successfully!");
     } else {
       alert("You can't create so much NFTs with your assets! Add more assets.");
     }
@@ -135,7 +135,6 @@ function App() {
 
   // zip files
   const resultToZip = () => {
-    console.log("Clicked zip button", isZipping);
     const zip = new JSZip();
     let files = resultImages;
     const metadataTotal = {
@@ -147,6 +146,8 @@ function App() {
       zip.folder("assets").file(file + ".png", dataURLtoFile(files[file - 1]), {
         base64: true,
       });
+      const percentage = Math.floor((50 * file) / resultMatadata.length);
+      setCurrentPercent(percentage);
     }
     zip
       .folder("metadata")
@@ -157,8 +158,11 @@ function App() {
       zip
         .folder("metadata")
         .file(metadata + ".json", JSON.stringify(resultMatadata[metadata - 1]));
+      const percentage = Math.floor(
+        50 + (50 * metadata) / resultMatadata.length
+      );
+      setCurrentPercent(percentage);
     }
-    // zip.file("metadata.json", "resultMatadata");
     zip.generateAsync({ type: "blob" }).then((content) => {
       FileSaver.saveAs(content, `${projectName}`);
       setIsZipping(false);
@@ -187,8 +191,10 @@ function App() {
   }, [collectionSize, projectName, projectDesc]);
   return (
     <div className="App">
-      {isGenerating && <Loading val="generating" />}
-      {isZipping && <Loading val="zipping" />}
+      {isGenerating && (
+        <Loading val="generating" currentPercent={currentPercent} />
+      )}
+      {isZipping && <Loading val="zipping" currentPercent={currentPercent} />}
       <PropertyManager
         collectionSize={collectionSize}
         setCollectionSize={setCollectionSize}
@@ -222,7 +228,6 @@ function App() {
           selectedImg={selectedImg}
           setSelectedImg={setSelectedImg}
           deleteImage={deleteImage}
-          setResultImg={setResultImg}
           setPreviewImg={setPreviewImg}
         />
       </div>

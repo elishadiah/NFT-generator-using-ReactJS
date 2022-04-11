@@ -8,7 +8,6 @@ export const ImageManager = ({
   selectedImg,
   setSelectedImg,
   deleteImage,
-  setResultImg,
   setPreviewImg,
 }) => {
   const [currentLayerData, setCurrentLayerData] = useState(null);
@@ -78,7 +77,6 @@ export const ImageManager = ({
   };
   const removeImg = (item) => {
     deleteImage();
-    setResultImg([]);
     setPreviewImg("");
   };
   useEffect(() => {
