@@ -124,6 +124,8 @@ function App() {
       setResultImages(imageList);
       setResultMetadata(metadataList);
       setIsGenerating(false);
+      setIsZipping(true);
+      resultToZip();
     } else {
       alert("You can't create so much NFTs with your assets! Add more assets.");
     }
