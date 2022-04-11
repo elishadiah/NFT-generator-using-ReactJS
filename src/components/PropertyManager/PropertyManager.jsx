@@ -11,6 +11,7 @@ export const PropertyManager = ({
   setProjectDesc,
   resultToZip,
   setIsZipping,
+  imgDimension,
 }) => {
   return (
     <div>
@@ -24,6 +25,7 @@ export const PropertyManager = ({
         setProjectDesc={setProjectDesc}
         resultToZip={resultToZip}
         setIsZipping={setIsZipping}
+        imgDimension={imgDimension}
       />
     </div>
   );

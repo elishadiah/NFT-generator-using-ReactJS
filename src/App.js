@@ -28,6 +28,7 @@ function App() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isZipping, setIsZipping] = useState(false);
   const [currentPercent, setCurrentPercent] = useState(0);
+  const [imgDimension, setImgDimension] = useState(null);
 
   const deleteLayer = () => {
     if (layerData.length > 0) {
@@ -270,6 +271,7 @@ function App() {
         setProjectDesc={setProjectDesc}
         resultToZip={resultToZip}
         setIsZipping={setIsZipping}
+        imgDimension={imgDimension}
       />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Sidebar
@@ -294,6 +296,8 @@ function App() {
           setSelectedImg={setSelectedImg}
           deleteImage={deleteImage}
           setPreviewImg={setPreviewImg}
+          imgDimension={imgDimension}
+          setImgDimension={setImgDimension}
         />
       </div>
 

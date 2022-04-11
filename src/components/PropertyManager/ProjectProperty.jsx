@@ -10,6 +10,7 @@ export const ProjectProperty = ({
   setProjectDesc,
   resultToZip,
   setIsZipping,
+  imgDimension,
 }) => {
   const onClickZip = () => {
     setIsZipping(true);
@@ -53,13 +54,19 @@ export const ProjectProperty = ({
           }
         />
       </div>
-      {/* <div className="property_item">
-        <p>Dimesion</p>
+      <div className="property_item">
+        <p>Dimension</p>
         <div className="property_dimension">
-          <input type="number" placeholder="" max={420} min={30} />
-          <input type="number" placeholder="" max={420} min={30} />
+          <p className="collection_price">
+            {imgDimension ? imgDimension[0] : 0}
+          </p>
+          <p className="collection_price">
+            {imgDimension ? imgDimension[1] : 0}
+          </p>
+          {/* <input type="number" placeholder="" max={512} min={30} /> */}
+          {/* <input type="number" placeholder="" max={512} min={30} /> */}
         </div>
-      </div> */}
+      </div>
       <div className="property_item">
         <p>Price (USD)</p>
         <p className="collection_price">{Math.round(price * 100) / 100} $</p>

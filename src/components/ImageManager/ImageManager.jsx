@@ -9,10 +9,13 @@ export const ImageManager = ({
   setSelectedImg,
   deleteImage,
   setPreviewImg,
+  setImgDimension,
+  imgDimension,
 }) => {
   const [currentLayerData, setCurrentLayerData] = useState(null);
 
   const handleFile = (file) => {
+    console.log("Image property", file);
     let newImgArray = [];
     let resultArray = [];
     let cloneArray = [...layerData];
@@ -25,6 +28,9 @@ export const ImageManager = ({
         size: file[i].size,
         rarity: 100,
       };
+      imgDimension === null
+        ? setDimention(URL.createObjectURL(file[i]))
+        : console.log("");
       newImgArray.push(newImageData);
     }
     newImgArray.map((item) => {
@@ -60,6 +66,9 @@ export const ImageManager = ({
         rarity: 100,
       };
       newImgArray.push(newImageData);
+      imgDimension === null
+        ? setDimention(URL.createObjectURL(e.target.files[i]))
+        : console.log("Dimension is", imgDimension);
     }
     newImgArray.map((item) => {
       resultArray = cloneArray.map((obj) =>
@@ -78,6 +87,14 @@ export const ImageManager = ({
   const removeImg = (item) => {
     deleteImage();
     setPreviewImg("");
+  };
+  const setDimention = (src) => {
+    console.log("SFDA", src);
+    var img = document.createElement("img");
+    img.setAttribute("src", src);
+    setTimeout(function () {
+      setImgDimension([img.height, img.width]);
+    }, 0);
   };
   useEffect(() => {
     setCurrentLayerData(
