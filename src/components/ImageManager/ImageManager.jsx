@@ -8,13 +8,12 @@ export const ImageManager = ({
   selectedImg,
   setSelectedImg,
   deleteImage,
-  setPreviewImg,
   setImgDimension,
   imgDimension,
 }) => {
   const [currentLayerData, setCurrentLayerData] = useState(null);
 
-  const handleFile = (file) => {
+  const handleFile = async (file) => {
     console.log("Image property", file);
     let newImgArray = [];
     let resultArray = [];
@@ -29,7 +28,7 @@ export const ImageManager = ({
         rarity: 100,
       };
       imgDimension === null
-        ? setDimention(URL.createObjectURL(file[i]))
+        ? await setDimention(URL.createObjectURL(file[i]))
         : console.log("");
       newImgArray.push(newImageData);
     }
@@ -52,7 +51,7 @@ export const ImageManager = ({
     let imageFile = event.dataTransfer.files;
     handleFile(imageFile);
   };
-  const selectImage = (e) => {
+  const selectImage = async (e) => {
     let newImgArray = [];
     let cloneArray = [...layerData];
     let resultArray = [];
@@ -67,7 +66,7 @@ export const ImageManager = ({
       };
       newImgArray.push(newImageData);
       imgDimension === null
-        ? setDimention(URL.createObjectURL(e.target.files[i]))
+        ? await setDimention(URL.createObjectURL(e.target.files[i]))
         : console.log("Dimension is", imgDimension);
     }
     newImgArray.map((item) => {
@@ -86,7 +85,6 @@ export const ImageManager = ({
   };
   const removeImg = (item) => {
     deleteImage();
-    setPreviewImg("");
   };
   const setDimention = (src) => {
     console.log("SFDA", src);

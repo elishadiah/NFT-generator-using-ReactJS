@@ -19,9 +19,9 @@ function App() {
   const [collectionSize, setCollectionSize] = useState(5);
   const [isNewLayer, setIsNewLayer] = useState(false);
   const [price, setPrice] = useState(0);
-  const [previewImg, setPreviewImg] = useState("");
-  const [resultImages, setResultImages] = useState([]);
-  const [resultMatadata, setResultMetadata] = useState([]);
+  // const [resultImages, setResultImages] = useState([]);
+  const [prevResultImages, setPrevResultImages] = useState([]);
+  // const [resultMatadata, setResultMetadata] = useState([]);
   const [projectName, setProjectName] = useState("");
   const [projectDesc, setProjectDesc] = useState("");
   const [isWaterMark, setIsWaterMark] = useState(true);
@@ -122,11 +122,11 @@ function App() {
           metadataList.push({ ...metadata, attributes });
         }
       }
-      setResultImages(imageList);
-      setResultMetadata(metadataList);
+      // setResultImages(imageList);
+      // setResultMetadata(metadataList);
       setIsGenerating(false);
       setIsZipping(true);
-      resultToZip();
+      resultToZip(imageList, metadataList);
     } else {
       alert("You can't create so much NFTs with your assets! Add more assets.");
     }
@@ -138,15 +138,8 @@ function App() {
     if (tempColSize < availableNumber) {
       let dnaList = [];
       let imageList = [];
-      let metadataList = [];
       while (dnaList.length < tempColSize) {
         const resImage = [];
-        let metadata = {
-          name: `${projectName}#` + String(dnaList.length + 1),
-          description: projectDesc,
-          external_url: "",
-          image: "/" + String(dnaList.length + 1) + ".png",
-        };
         const attributes = [];
         let dna = "";
         // eslint-disable-next-line array-callback-return
@@ -184,10 +177,9 @@ function App() {
           dnaList.push(dna);
           const img = await mergeImages(tempRes);
           imageList.push(img);
-          metadataList.push({ ...metadata, attributes });
         }
       }
-      setResultImages(imageList);
+      setPrevResultImages(imageList);
     } else {
       console.log("Not enough to create images");
     }
@@ -197,19 +189,19 @@ function App() {
   };
 
   // zip files
-  const resultToZip = () => {
+  const resultToZip = (imageList, metadataList) => {
     const zip = new JSZip();
-    let files = resultImages;
+    let files = imageList;
     const metadataTotal = {
       name: projectName,
       description: projectDesc,
-      collection: resultMatadata,
+      collection: metadataList,
     };
     for (let file = 1; file <= files.length; file++) {
       zip.folder("assets").file(file + ".png", dataURLtoFile(files[file - 1]), {
         base64: true,
       });
-      const percentage = Math.floor((50 * file) / resultMatadata.length);
+      const percentage = Math.floor((50 * file) / metadataList.length);
       setCurrentPercent(percentage);
     }
     zip
@@ -217,13 +209,11 @@ function App() {
       .file("metadata.json", JSON.stringify(metadataTotal), {
         binary: false,
       });
-    for (let metadata = 1; metadata <= resultMatadata.length; metadata++) {
+    for (let metadata = 1; metadata <= metadataList.length; metadata++) {
       zip
         .folder("metadata")
-        .file(metadata + ".json", JSON.stringify(resultMatadata[metadata - 1]));
-      const percentage = Math.floor(
-        50 + (50 * metadata) / resultMatadata.length
-      );
+        .file(metadata + ".json", JSON.stringify(metadataList[metadata - 1]));
+      const percentage = Math.floor(50 + (50 * metadata) / metadataList.length);
       setCurrentPercent(percentage);
     }
     zip.generateAsync({ type: "blob" }).then((content) => {
@@ -284,9 +274,8 @@ function App() {
           setCollectionSize={setCollectionSize}
           isNewLayer={isNewLayer}
           setIsNewLayer={setIsNewLayer}
-          previewImg={previewImg}
           generateImage={generateImage}
-          resultImages={resultImages}
+          resultImages={prevResultImages}
         />
         <ImageManager
           selectedLayer={selectedLayer}
@@ -295,7 +284,6 @@ function App() {
           selectedImg={selectedImg}
           setSelectedImg={setSelectedImg}
           deleteImage={deleteImage}
-          setPreviewImg={setPreviewImg}
           imgDimension={imgDimension}
           setImgDimension={setImgDimension}
         />

@@ -63,8 +63,6 @@ export const ProjectProperty = ({
           <p className="collection_price">
             {imgDimension ? imgDimension[1] : 0}
           </p>
-          {/* <input type="number" placeholder="" max={512} min={30} /> */}
-          {/* <input type="number" placeholder="" max={512} min={30} /> */}
         </div>
       </div>
       <div className="property_item">

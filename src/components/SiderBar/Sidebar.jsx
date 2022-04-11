@@ -16,7 +16,6 @@ export const Sidebar = ({
   setCollectionSize,
   isNewLayer,
   setIsNewLayer,
-  previewImg,
   generateImage,
   resultImages,
 }) => {
@@ -42,7 +41,7 @@ export const Sidebar = ({
   };
 
   const previewNFT = () => {
-    // setIsPreview(!isPreview);
+    setIsPreview(true);
     index === resultImages.length - 1 ? setIndex(0) : setIndex(index + 1);
     layerData
       ? console.log("this is preview button")
@@ -50,8 +49,8 @@ export const Sidebar = ({
   };
 
   useEffect(() => {
-    resultImages.length > 0 ? setIsPreview(true) : setIsPreview(false);
-  }, [layerData, selectedLayer, previewImg, resultImages]);
+    // resultImages.length > 0 ? setIsPreview(true) : setIsPreview(false);
+  }, [layerData, selectedLayer, resultImages]);
   return (
     <div className="sidebar">
       <LayerProperty
