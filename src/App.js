@@ -133,7 +133,7 @@ function App() {
 
   const generatePrevImg = async () => {
     const availableNumber = availableNFTs();
-    const tempColSize = availableNumber > 100 ? 50 : availableNumber / 2;
+    const tempColSize = availableNumber > 50 ? 20 : availableNumber / 2;
     if (tempColSize < availableNumber) {
       let dnaList = [];
       let imageList = [];
