@@ -11,10 +11,18 @@ export const ProjectProperty = ({
   resultToZip,
   setIsZipping,
   imgDimension,
+  setIsPreview,
 }) => {
   const onClickZip = () => {
     setIsZipping(true);
     resultToZip();
+  };
+
+  const changeColSize = (e) => {
+    setCollectionSize(
+      e.target.value > 15000 ? 15000 : e.target.value < 0 ? 0 : e.target.value
+    );
+    setIsPreview(false);
   };
   return (
     <div className="property_container">
@@ -43,15 +51,7 @@ export const ProjectProperty = ({
           placeholder="Collection Size"
           value={collectionSize}
           className="collection_input"
-          onChange={(e) =>
-            setCollectionSize(
-              e.target.value > 15000
-                ? 15000
-                : e.target.value < 0
-                ? 0
-                : e.target.value
-            )
-          }
+          onChange={(e) => changeColSize(e)}
         />
       </div>
       <div className="property_item">

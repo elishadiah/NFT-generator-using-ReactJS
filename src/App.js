@@ -19,9 +19,8 @@ function App() {
   const [collectionSize, setCollectionSize] = useState(5);
   const [isNewLayer, setIsNewLayer] = useState(false);
   const [price, setPrice] = useState(0);
-  // const [resultImages, setResultImages] = useState([]);
+  const [isPreview, setIsPreview] = useState(false);
   const [prevResultImages, setPrevResultImages] = useState([]);
-  // const [resultMatadata, setResultMetadata] = useState([]);
   const [projectName, setProjectName] = useState("");
   const [projectDesc, setProjectDesc] = useState("");
   const [isWaterMark, setIsWaterMark] = useState(true);
@@ -122,8 +121,6 @@ function App() {
           metadataList.push({ ...metadata, attributes });
         }
       }
-      // setResultImages(imageList);
-      // setResultMetadata(metadataList);
       setIsGenerating(false);
       setIsZipping(true);
       resultToZip(imageList, metadataList);
@@ -135,7 +132,7 @@ function App() {
   const generatePrevImg = async () => {
     const availableNumber = availableNFTs();
     const tempColSize = availableNumber > 50 ? 20 : availableNumber / 2;
-    if (tempColSize < availableNumber) {
+    if (collectionSize < availableNumber) {
       let dnaList = [];
       let imageList = [];
       while (dnaList.length < tempColSize) {
@@ -181,7 +178,8 @@ function App() {
       }
       setPrevResultImages(imageList);
     } else {
-      console.log("Not enough to create images");
+      setPrevResultImages([]);
+      alert("You can't create so much NFTs with your assets! Add more assets.");
     }
   };
   const generateRandom = (num) => {
@@ -236,7 +234,7 @@ function App() {
   };
 
   useEffect(() => {
-    generatePrevImg();
+    setIsPreview(false);
     setPrice(
       isWaterMark
         ? 0
@@ -244,7 +242,7 @@ function App() {
             (4.99 * (collectionSize % 5000)) / 100
     );
     collectionSize <= 100 ? setIsWaterMark(true) : setIsWaterMark(false);
-  }, [collectionSize, projectName, projectDesc, isWaterMark, layerData]);
+  }, [collectionSize, isWaterMark, layerData]);
   return (
     <div className="App">
       {isGenerating && (
@@ -262,6 +260,7 @@ function App() {
         resultToZip={resultToZip}
         setIsZipping={setIsZipping}
         imgDimension={imgDimension}
+        setIsPreview={setIsPreview}
       />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Sidebar
@@ -276,6 +275,9 @@ function App() {
           setIsNewLayer={setIsNewLayer}
           generateImage={generateImage}
           resultImages={prevResultImages}
+          generatePrevImg={generatePrevImg}
+          setIsPreview={setIsPreview}
+          isPreview={isPreview}
         />
         <ImageManager
           selectedLayer={selectedLayer}
@@ -286,6 +288,7 @@ function App() {
           deleteImage={deleteImage}
           imgDimension={imgDimension}
           setImgDimension={setImgDimension}
+          setIsPreview={setIsPreview}
         />
       </div>
 

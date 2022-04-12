@@ -18,14 +18,17 @@ export const Sidebar = ({
   setIsNewLayer,
   generateImage,
   resultImages,
+  setIsPreview,
+  isPreview,
+  generatePrevImg,
 }) => {
   const [isOptiosOpen, setIsOptionsOpen] = useState(false);
-  const [isPreview, setIsPreview] = useState(false);
   const [index, setIndex] = useState(0);
 
   const setCollectionNumber = (item) => {
     setCollectionSize(item);
     setIsOptionsOpen(false);
+    setIsPreview(false);
   };
 
   const handleDrop = (droppedItem) => {
@@ -34,6 +37,7 @@ export const Sidebar = ({
     const [reorderedItem] = newState.splice(droppedItem.source.index, 1);
     newState.splice(droppedItem.destination.index, 0, reorderedItem);
     setLayerData(newState);
+    setIsPreview(false);
   };
 
   const generateCollection = () => {
@@ -41,7 +45,10 @@ export const Sidebar = ({
   };
 
   const previewNFT = () => {
-    setIsPreview(true);
+    if (!isPreview) {
+      generatePrevImg();
+      setIsPreview(true);
+    }
     index === resultImages.length - 1 ? setIndex(0) : setIndex(index + 1);
     layerData
       ? console.log("this is preview button")
