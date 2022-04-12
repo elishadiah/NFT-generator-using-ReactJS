@@ -214,11 +214,14 @@ function App() {
       const percentage = Math.floor(50 + (50 * metadata) / metadataList.length);
       setCurrentPercent(percentage);
     }
-    zip.generateAsync({ type: "blob" }).then((content) => {
-      FileSaver.saveAs(content, `${projectName}`);
-      setIsZipping(false);
-      console.log("finished zipping", isZipping);
-    });
+    zip
+      .generateAsync({ type: "blob" }, function updateCallback(metadata) {
+        setCurrentPercent(Math.floor(metadata.percent));
+      })
+      .then((content) => {
+        FileSaver.saveAs(content, `${projectName}`);
+        setIsZipping(false);
+      });
   };
 
   const dataURLtoFile = (dataurl, filename) => {
