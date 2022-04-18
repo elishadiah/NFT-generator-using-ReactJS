@@ -1,23 +1,33 @@
 import React from "react";
-import { LayerProperty } from "./LayerProperty";
 import { ProjectProperty } from "./ProjectProperty";
 
 export const PropertyManager = ({
-  setRarity,
-  deleteLayer,
-  layerData,
-  selectedLayer,
-  setLayerData,
+  collectionSize,
+  setCollectionSize,
+  price,
+  projectName,
+  projectDesc,
+  setProjectName,
+  setProjectDesc,
+  resultToZip,
+  setIsZipping,
+  imgDimension,
+  setIsPreview,
 }) => {
   return (
     <div>
-      <ProjectProperty />
-      <LayerProperty
-        setRarity={setRarity}
-        deleteLayer={deleteLayer}
-        layerData={layerData}
-        selectedLayer={selectedLayer}
-        setLayerData={setLayerData}
+      <ProjectProperty
+        collectionSize={collectionSize}
+        setCollectionSize={setCollectionSize}
+        price={price}
+        projectName={projectName}
+        projectDesc={projectDesc}
+        setProjectName={setProjectName}
+        setProjectDesc={setProjectDesc}
+        resultToZip={resultToZip}
+        setIsZipping={setIsZipping}
+        imgDimension={imgDimension}
+        setIsPreview={setIsPreview}
       />
     </div>
   );

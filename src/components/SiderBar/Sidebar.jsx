@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { priceData } from "../../constant/priceData";
+import { bigPacks, priceData } from "../../constant/priceData";
 import { Divider } from "./Divider";
 import { Layer } from "./Layer";
+import { LayerProperty } from "./LayerProperty";
 import { NewLayer } from "./NewLayer";
 
 export const Sidebar = ({
+  setRarity,
+  deleteLayer,
   layerData,
   setLayerData,
   selectedLayer,
   setSelectedLayer,
+  setCollectionSize,
+  isNewLayer,
+  setIsNewLayer,
+  generateImage,
+  resultImages,
+  setIsPreview,
+  isPreview,
+  generatePrevImg,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOptiosOpen, setIsOptionsOpen] = useState(false);
+  const [index, setIndex] = useState(0);
 
-  const generateCollection = (item) => {
-    console.log("Generate Function: ", item);
-    setIsOpen(false);
+  const setCollectionNumber = (item) => {
+    setCollectionSize(item);
+    setIsOptionsOpen(false);
+    setIsPreview(false);
   };
 
   const handleDrop = (droppedItem) => {
@@ -24,12 +37,45 @@ export const Sidebar = ({
     const [reorderedItem] = newState.splice(droppedItem.source.index, 1);
     newState.splice(droppedItem.destination.index, 0, reorderedItem);
     setLayerData(newState);
+    setIsPreview(false);
   };
 
-  useEffect(() => {}, [layerData, selectedLayer]);
+  const generateCollection = () => {
+    generateImage();
+  };
+
+  const previewNFT = () => {
+    if (!isPreview) {
+      generatePrevImg();
+      setIsPreview(true);
+    }
+    index === resultImages.length - 1 ? setIndex(0) : setIndex(index + 1);
+    layerData
+      ? console.log("this is preview button")
+      : console.log("You should choose images to see your NFTs...");
+  };
+
+  useEffect(() => {
+    // resultImages.length > 0 ? setIsPreview(true) : setIsPreview(false);
+  }, [layerData, selectedLayer, resultImages]);
   return (
     <div className="sidebar">
-      <div className="sidebar_title">Layers</div>
+      <LayerProperty
+        setRarity={setRarity}
+        deleteLayer={deleteLayer}
+        layerData={layerData}
+        selectedLayer={selectedLayer}
+        setLayerData={setLayerData}
+        setIsNewLayer={setIsNewLayer}
+      />
+      {isNewLayer && (
+        <NewLayer
+          layerData={layerData}
+          setLayerData={setLayerData}
+          setSelectedLayer={setSelectedLayer}
+          setIsNewLayer={setIsNewLayer}
+        />
+      )}
       <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="list-container">
           {(provided) => (
@@ -67,16 +113,15 @@ export const Sidebar = ({
           )}
         </Droppable>
       </DragDropContext>
-      <NewLayer
-        layerData={layerData}
-        setLayerData={setLayerData}
-        setSelectedLayer={setSelectedLayer}
-      />
+
       <div className="buttons">
-        <button>Preview</button>
-        <button onClick={() => setIsOpen(!isOpen)}>Pay & Generate Col.</button>
+        <button onClick={() => previewNFT()}>Preview</button>
+        <button onClick={() => generateCollection()}>
+          Generate Collection
+        </button>
+        <button onClick={() => setIsOptionsOpen(!isOptiosOpen)}>&#9660;</button>
       </div>
-      {isOpen && (
+      {isOptiosOpen && (
         <div className="generate_collection">
           <p className="collection_size">Collection Size:</p>
           <Divider />
@@ -84,7 +129,7 @@ export const Sidebar = ({
             {priceData.map((item) => (
               <div
                 className="generate_item"
-                onClick={() => generateCollection(item.link)}
+                onClick={() => setCollectionNumber(item.number)}
               >
                 <p>{item.title}</p>
                 <p>(${item.price})</p>
@@ -92,14 +137,41 @@ export const Sidebar = ({
             ))}
           </div>
           <Divider />
-          <p className="generate_item">
-            My Collection is smaller or equal to 100
-          </p>
+          <div>
+            Save up by purchasing big packs
+            <div className="nft_packs">
+              {bigPacks.map((item) => (
+                <div className="card_pack">
+                  <p className="card_save">{item.save}</p>
+                  <p className="card_price">${item.price}</p>
+                  <p className="card_save">{item.nfts} NFTs</p>
+                  <button onClick={() => setCollectionNumber(item.value)}>
+                    Select
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
           <Divider />
           <p>
-            Want another size? <br /> Select a number up to 10,000 in the
-            right-hand column of your scren.
+            Want another size? <br /> Select a number up to 15,000 in the top
+            row of your screen.
           </p>
+        </div>
+      )}
+      {isPreview && (
+        <div>
+          <img
+            id="preview_id"
+            style={{
+              width: "98%",
+              border: "solid pink 2px",
+              marginTop: 20,
+              borderRadius: 20,
+            }}
+            src={resultImages[index]}
+            alt="We can't generate any NFT now!"
+          />
         </div>
       )}
     </div>

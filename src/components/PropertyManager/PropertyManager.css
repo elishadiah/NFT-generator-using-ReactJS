@@ -1,8 +1,10 @@
-.projectproperty {
+/* .projectproperty {
     width: 400px;
     margin: 50px;
-}
+} */
 .property_container {
+    display: flex;
+    justify-content: space-between;
     border: solid gray 1px;
     border-radius: 5px;
     padding: 10px;
@@ -12,7 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    /* width: 100%; */
 }
 .property_item p {
     width: 100%;
@@ -22,7 +24,7 @@
     font-weight: 600;
 }
 .property_item input {
-    width: 360px;
+    width: 300px;
     height: 32px;
     background:none;
     padding: 0px 10px;
@@ -30,33 +32,67 @@
     border-radius: 5px;
     color: white;
 }
+
+.property_item_layer {
+    display: flex;
+    align-items: center;
+}
+.property_item_layer input {
+    width: 500px;
+    height: 32px;
+    background:none;
+    padding: 0px 10px;
+    border: solid 1px gray;
+    border-radius: 5px;
+    color: white;
+}
+.property_item_layer p {
+    width: 100%;
+    text-align: left;
+    margin: 10px 0px;
+    font-size: 18px;
+    font-weight: 600;
+}
 .property_dimension {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 .property_dimension input{
-    width: 42%;
+    width: 120px;
     color: white;
+    margin: 0px 5px;
+}
+.collection_input {
+    width: 100px !important;
+}
+.collection_price {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: 32px;
+    width: 75px !important;
+    padding: 0px 10px;
+    border: solid 1px gray;
+    border-radius: 5px;
+    margin: 0px!important;
 }
 .export_button {
-    width: 380px;
+    width: 100px;
     background: none;
     border: solid gray 1px;
     height: 32px;
-    margin-top: 15px;
 }
 .layer_container {
     position: relative;
 }
 .setting_button {
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
     right: 10px;
     top: 0px;
-    width: 160px;
+    width: 120px;
     height: 28px;
     font-size: 16px;
     font-weight: 700;
@@ -87,7 +123,7 @@
     margin: 20px 0px;
 }
 .range_area input{
-    width: 30px;
+    width: 40px;
     height: 16px;
     background: none;
     border: none;
@@ -135,7 +171,7 @@
 .layer_property_close:hover {
     cursor: pointer;
     background-color: #2947F2;
-    border-radius: 50%;
+    /* border-radius: 50%; */
 }
 .range_item_property {
     display: flex;

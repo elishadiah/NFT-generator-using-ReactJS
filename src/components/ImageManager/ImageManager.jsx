@@ -8,24 +8,39 @@ export const ImageManager = ({
   selectedImg,
   setSelectedImg,
   deleteImage,
+  setImgDimension,
+  imgDimension,
 }) => {
   const [currentLayerData, setCurrentLayerData] = useState(null);
 
-  const handleFile = (file) => {
-    var dates = new Date();
-    const newImageData = {
-      id: new Date(dates).getTime(),
-      url: URL.createObjectURL(file),
-      title: file.name,
-      size: file.size,
-      rarity: 20,
-    };
-    const newState = layerData.map((obj) =>
-      obj.id === selectedLayer
-        ? { ...obj, images: [...obj.images, newImageData] }
-        : obj
-    );
-    setLayerData(newState);
+  const handleFile = async (file) => {
+    console.log("Image property", file);
+    let newImgArray = [];
+    let resultArray = [];
+    let cloneArray = [...layerData];
+    for (let i = 0; i < file.length; i++) {
+      var dates = new Date();
+      const newImageData = {
+        id: new Date(dates).getTime() + 1,
+        url: URL.createObjectURL(file[i]),
+        title: file[i].name,
+        size: file[i].size,
+        rarity: 100,
+      };
+      imgDimension === null
+        ? await setDimention(URL.createObjectURL(file[i]))
+        : console.log("");
+      newImgArray.push(newImageData);
+    }
+    newImgArray.map((item) => {
+      resultArray = cloneArray.map((obj) =>
+        obj.id === selectedLayer
+          ? { ...obj, images: [...obj.images, item] }
+          : obj
+      );
+      cloneArray = resultArray;
+    });
+    setLayerData(resultArray);
   };
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -33,24 +48,36 @@ export const ImageManager = ({
   const handleOnDrop = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    let imageFile = event.dataTransfer.files[0];
+    let imageFile = event.dataTransfer.files;
     handleFile(imageFile);
   };
-  const selectImage = (e) => {
-    var dates = new Date();
-    const newImageData = {
-      id: new Date(dates).getTime(),
-      url: URL.createObjectURL(e.target.files[0]),
-      title: e.target.files[0].name,
-      size: e.target.files[0].size,
-      rarity: 20,
-    };
-    const newState = layerData.map((obj) =>
-      obj.id === selectedLayer
-        ? { ...obj, images: [...obj.images, newImageData] }
-        : obj
-    );
-    setLayerData(newState);
+  const selectImage = async (e) => {
+    let newImgArray = [];
+    let cloneArray = [...layerData];
+    let resultArray = [];
+    for (let i = 0; i < e.target.files.length; i++) {
+      var dates = new Date();
+      const newImageData = {
+        id: new Date(dates).getTime() + i,
+        url: URL.createObjectURL(e.target.files[i]),
+        title: e.target.files[i].name,
+        size: e.target.files[i].size,
+        rarity: 100,
+      };
+      newImgArray.push(newImageData);
+      imgDimension === null
+        ? await setDimention(URL.createObjectURL(e.target.files[i]))
+        : console.log("Dimension is", imgDimension);
+    }
+    newImgArray.map((item) => {
+      resultArray = cloneArray.map((obj) =>
+        obj.id === selectedLayer
+          ? { ...obj, images: [...obj.images, item] }
+          : obj
+      );
+      cloneArray = resultArray;
+    });
+    setLayerData(resultArray);
   };
   // Image select
   const handleClickImg = (item) => {
@@ -58,6 +85,14 @@ export const ImageManager = ({
   };
   const removeImg = (item) => {
     deleteImage();
+  };
+  const setDimention = (src) => {
+    console.log("SFDA", src);
+    var img = document.createElement("img");
+    img.setAttribute("src", src);
+    setTimeout(function () {
+      setImgDimension([img.height, img.width]);
+    }, 0);
   };
   useEffect(() => {
     setCurrentLayerData(
@@ -68,6 +103,25 @@ export const ImageManager = ({
   }, [selectedLayer, layerData]);
   return (
     <div className="image_manager">
+      {selectedLayer !== null && (
+        <div
+          className="upload_image"
+          onDragOver={handleDragOver}
+          onDrop={handleOnDrop}
+        >
+          <p>Click or drop images here!</p>
+          <p style={{ fontSize: 16, fontStyle: "italic" }}>
+            (image/png, image/git, video/mp4, Max size: 10MB)
+          </p>
+          <input
+            id="hidden-input"
+            type="file"
+            multiple={true}
+            className="image_input"
+            onChange={(e) => selectImage(e)}
+          />
+        </div>
+      )}
       <div className="image_show">
         {currentLayerData && (
           <div className="image_view">
@@ -92,6 +146,7 @@ export const ImageManager = ({
                         &times;
                       </p>
                     )}
+                    <p className="rarity_img">{item.rarity}%</p>
                   </div>
                 );
               })
@@ -101,25 +156,6 @@ export const ImageManager = ({
           </div>
         )}
       </div>
-      {selectedLayer !== null && (
-        <div
-          className="upload_image"
-          onDragOver={handleDragOver}
-          onDrop={handleOnDrop}
-        >
-          <p>Click or drop images here!</p>
-          <p style={{ fontSize: 16, fontStyle: "italic" }}>
-            (image/png, image/git, video/mp4, Max size: 10MB)
-          </p>
-          <input
-            id="hidden-input"
-            type="file"
-            multiple=""
-            className="image_input"
-            onChange={(e) => selectImage(e)}
-          />
-        </div>
-      )}
     </div>
   );
 };
