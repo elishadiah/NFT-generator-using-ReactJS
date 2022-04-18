@@ -44,7 +44,7 @@ export const PayPal = ({ price, generateImageStep, setIsPayment }) => {
 
   useEffect(() => {
     if (success) {
-      alert("Payment successful!!");
+      // alert("Payment successful!!");
       generateImageStep();
       setIsPayment(false);
     }

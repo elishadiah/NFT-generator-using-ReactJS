@@ -69,12 +69,12 @@ export const ProjectProperty = ({
         <p>Price (USD)</p>
         <p className="collection_price">{Math.round(price * 100) / 100} $</p>
       </div>
-      <div className="property_item">
+      {/* <div className="property_item">
         <p>Export:</p>
         <button className="export_button" onClick={() => onClickZip()}>
           Zip
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
