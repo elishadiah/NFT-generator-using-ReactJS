@@ -57,7 +57,7 @@ export const PayPal = ({ price, generateImageStep, setIsPayment }) => {
     <PayPalScriptProvider
       options={{
         "client-id":
-          "AUVepGIdxpvoX8SdumYod6-0HeE2HbfaUWIjttql312tMTU8gpwUi3PtaOj5U5GOPA93E0EfI_jLGnja",
+          "AYc6YGFHF1Xw19mlR3MrTmP4xQ61avH0FvxI8AnLGHOJcCSGzCrgNH-XzUBH45e24AL96nrTRAG5wdkg",
       }}
     >
       <div>
